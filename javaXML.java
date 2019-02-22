@@ -36,7 +36,7 @@ public class javaXML{
 		ArrayList<String> nombre , ArrayList<String> edad , ArrayList<String> dni ) throws Exception{
 
 		if(  nombre.isEmpty() || edad.isEmpty() || dni.isEmpty()
-		|| ( ( nombre.size() != edad.size() ) && ( nombre.size() != dni.size() ) )  )
+		|| ( nombre.size() != edad.size() ) || ( nombre.size() != dni.size() )  )
 			System.out.println( "ERROR: lista no válida" );
         
 		else{
