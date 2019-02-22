@@ -24,20 +24,20 @@ import org.w3c.dom.Text;
 public class javaXML{
 
 	/**
-     * función para generar un documento XML
-     * a partir de los datos de entrada
-     * @param nombreArchivo
-     * @param nombre
-     * @param edad
-     * @param dni
-     * @throws Exception
-     */
+         * función para generar un documento XML
+         * a partir de los datos de entrada
+         * @param nombreArchivo
+         * @param nombre
+         * @param edad
+         * @param dni
+         * @throws Exception
+         */
 	public static void generarXML( String nombreArchivo ,
 		ArrayList<String> nombre , ArrayList<String> edad , ArrayList<String> dni ) throws Exception{
 
 		if(  nombre.isEmpty() || edad.isEmpty() || dni.isEmpty()
 		|| ( ( nombre.size() != edad.size() ) && ( nombre.size() != dni.size() ) )  )
-            System.out.println( "ERROR: lista no válida" );
+			System.out.println( "ERROR: lista no válida" );
         
 		else{
 			DOMImplementation implementation
