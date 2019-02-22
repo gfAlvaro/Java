@@ -122,6 +122,8 @@ public class javaXML{
 		try{
 			generarXML( nombreArchivo , nombre , edad , dni );
 			}catch( Exception e ){}
+		
+		System.out.println("Documento creado.");
 		}
 
 	} // Fin del programa
