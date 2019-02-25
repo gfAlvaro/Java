@@ -13,7 +13,7 @@ public class primos{
 	public static void main( String[] args ) {
 		
 		for( int i = 1 ; i <= 1000 ; i = Matematica.siguientePrimo(i) )
-				System.out.print(i + " ");
+				System.out.print( i + " " );
 		System.out.println();
 		}
-	}
+	} // Fin del programa
