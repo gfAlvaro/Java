@@ -1,5 +1,5 @@
 /**
-* Funciones de la biblioteca matemática
+* Definición de una biblioteca matemática
 * @author Alvaro Garcia Fuentes
 * @version 1.0
 */
