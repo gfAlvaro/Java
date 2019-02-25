@@ -64,7 +64,7 @@ public class convertirBases{
 		
 		return numero;
 		}
-	
+
 	/**
 	 * funcion para pasar de decimal a octal
 	 * @param numero
