@@ -9,7 +9,7 @@ package funciones;
 import java.util.Scanner;
 
 public class DecimalABinario{
-	
+
 	public static int decimalBinario(int numero){
 
 		int cociente = numero;
