@@ -1,6 +1,6 @@
 /**
  * Fraccion.java
- *  Definicion de la clase Fraccion con las siguientes operaciones:
+ *  Definicion de una clase Fraccion con las siguientes operaciones:
  *
  *    Contruir un objeto Fraccion pasándole al constructor el numerador y el denominador.
  *    Obtener la fracción.
