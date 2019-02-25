@@ -11,7 +11,7 @@ import bibliotecaMatematica.Matematica;
 import java.util.Scanner;
 
 public class BinarioADecimal{
-	
+
 	public static int binarioDecimal( int binario ){
 		
 		int numero = 0;
