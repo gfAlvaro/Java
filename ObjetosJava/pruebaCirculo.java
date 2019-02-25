@@ -27,4 +27,3 @@ public class pruebaCirculo{
 		}
 	
 	} // Fin del programa
-
