@@ -8,7 +8,7 @@
 package funciones;
 import java.util.Scanner;
 
-public class DecimalABinario{
+public class decimalABinario{
 
 	public static int decimalBinario(int numero){
 
