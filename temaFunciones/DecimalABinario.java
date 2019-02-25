@@ -40,4 +40,4 @@ public class DecimalABinario{
 		
 		System.out.println( binario );
 		}
-	}
+	} // Fin del programa
