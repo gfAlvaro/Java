@@ -16,7 +16,7 @@ public class Matematica{
 	public static boolean esPrimo( int numero ){
 		
 		boolean resultado = true;
-		
+
 		for( int i = 2 ; i < numero ; i++ )
 			if( numero % i == 0 ){
 				resultado = false;
