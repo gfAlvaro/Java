@@ -2,7 +2,7 @@
  * javaXML.java
  * Este programa genera un documento XML llamado lista.xml
  * que contiene una lista de personas con nombre, edad y dni
- * 
+ * @version 1.0
  * @author Álvaro García Fuentes
  */
 package javaXML;
