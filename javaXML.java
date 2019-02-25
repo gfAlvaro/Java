@@ -43,7 +43,7 @@ public class javaXML{
 			DOMImplementation implementation
 				= DocumentBuilderFactory.newInstance().newDocumentBuilder().getDOMImplementation();
 			Document documento = implementation.createDocument( null , nombreArchivo , null );
-			documento.setXmlVersion("1.0");
+			documento.setXmlVersion( "1.0" );
 
 			// crear nodo principal
 			Element nodoRaiz = documento.getDocumentElement();
@@ -86,8 +86,8 @@ public class javaXML{
 			Transformer trans = TransformerFactory.newInstance().newTransformer();
 
 			// Indentamos adecuadamente la lista
-			trans.setOutputProperty(OutputKeys.INDENT, "yes");
-			trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			trans.setOutputProperty( OutputKeys.INDENT , "yes" );
+			trans.setOutputProperty( "{http://xml.apache.org/xslt}indent-amount" , "2" );
             
 			// Escribimos la lista en el documento
 			trans.transform( fuente , resultado );
@@ -121,9 +121,8 @@ public class javaXML{
 
 		try{
 			generarXML( nombreArchivo , nombre , edad , dni );
+			System.out.println( "Documento creado." );			
 			}catch( Exception e ){}
-		
-		System.out.println("Documento creado.");
 		}
 
 	} // Fin del programa
