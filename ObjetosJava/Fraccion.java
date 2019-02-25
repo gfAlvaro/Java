@@ -66,7 +66,7 @@ public class Fraccion{
 	 * 
 	 * @param __numerador
 	 */
-	public void set_numerador(int numerador) {
+	public void set_numerador( int numerador ) {
 		this.__numerador = numerador;
 		}
 
@@ -95,7 +95,7 @@ public class Fraccion{
 	 * 
 	 * @return float
 	 */
-	public float resultado() {
+	public float resultado(){
 		return ( (float) this.get_numerador() ) / ( (float) this.get_denominador() );
 		}
 
@@ -141,7 +141,7 @@ public class Fraccion{
 	/**
 	 * Método que realiza la simplificación de la fracción
 	 */
-	public void simplificar() {
+	public void simplificar(){
 
 		boolean irreducible;
 
@@ -154,8 +154,8 @@ public class Fraccion{
 					this.__denominador = this.__denominador / i;
 					irreducible = false;
 					break;
-				}
-		}while( !irreducible );
+					}
+			}while( !irreducible );
 		}
 
 	} // Fin de la clase Fraccion
