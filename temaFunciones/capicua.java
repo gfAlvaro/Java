@@ -17,4 +17,4 @@ public class capicua{
 				System.out.print(i + " ");
 		System.out.println();
 		}
-	}
+	} // Fin del programa
