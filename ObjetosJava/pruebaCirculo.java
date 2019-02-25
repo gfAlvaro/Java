@@ -25,5 +25,5 @@ public class pruebaCirculo{
 		
 		System.out.println( miCirculo.getRadio() );
 		}
-	
+
 	} // Fin del programa
