@@ -34,5 +34,5 @@ public class BinarioADecimal{
 			
 		System.out.println( binarioDecimal( binario ) );
 		}
-	}
+	} // Fin del programa
 
