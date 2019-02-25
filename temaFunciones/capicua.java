@@ -9,7 +9,7 @@ package funciones;
 import bibliotecaMatematica.Matematica;
 
 public class capicua{
-	
+
 	public static void main( String[] args ) {
 		
 		for( int i = 1 ; i <= 99999 ; i++ )
