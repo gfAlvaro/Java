@@ -10,7 +10,7 @@ package funciones;
 import bibliotecaMatematica.Matematica;
 import java.util.Scanner;
 
-public class BinarioADecimal{
+public class binarioADecimal{
 
 	public static int binarioDecimal( int binario ){
 		
