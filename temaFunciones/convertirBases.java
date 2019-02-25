@@ -61,7 +61,7 @@ public class convertirBases{
 		for( int i = 0 ; i < Matematica.digitos( octal ) ; i++ )
 			numero = numero + Matematica.potencia( 8 , Matematica.digitos( octal ) - i - 1 )
 					 * Matematica.digitoN( octal , i );
-		
+
 		return numero;
 		}
 
