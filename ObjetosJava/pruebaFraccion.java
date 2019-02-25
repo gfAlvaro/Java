@@ -5,7 +5,7 @@
 package fraccion;
 
 public class pruebaFraccion{
-	
+
 	public static void main( String[] args ){
 		
 		Fraccion miFraccion = new Fraccion( 2 , 4 );
