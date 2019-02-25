@@ -18,7 +18,7 @@ public class convertirBases{
 	 * @return int
 	 */
 	public static int binarioDecimal( int binario ){
-		
+
 		int numero = 0;
 		
 		for( int i = 0 ; i < Matematica.digitos(binario) ; i++ )
