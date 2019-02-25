@@ -27,7 +27,7 @@ public class Circulo{
 	public Circulo(){
 		this.__radio = 1;
 		}
-	
+
 	/**
 	 * Constructor paramétrico de la clase Circulo
 	 * @param radio
