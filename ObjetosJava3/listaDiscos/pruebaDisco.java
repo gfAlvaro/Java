@@ -56,11 +56,11 @@ public class pruebaDisco{
 			System.out.println( "\nLISTADO" );
 			System.out.println( "=======" );
         
-			switch(opcion){
+			switch( opcion ){
 				case 1:
 					// listado completo
 					for( int i = 0 ; i < album.length ; i++ )
-						if(album[i].getCodigo() != "LIBRE")
+						if( album[i].getCodigo() != "LIBRE" )
 							System.out.println(album[i]);    
 					break;
 				case 2:
@@ -69,16 +69,16 @@ public class pruebaDisco{
 					System.out.print( "Introduzca autor: " );
 					autor = tecladoString();
 
-					for(int i = 0; i < album.length ; i++)
-						try {
-							if(album[i].getAutor().equals(autor) && album[i].getCodigo() != "LIBRE") {
+					for( int i = 0; i < album.length ; i++ )
+						try{
+							if( album[i].getAutor().equals(autor) && album[i].getCodigo() != "LIBRE" ){
 								System.out.println(album[i]);   
 								error = false;
 								}
-							}catch(NullPointerException ex) {}
+							}catch( NullPointerException ex ){}
 
-					if(error == true)
-						System.out.println("ERROR: No existe ese autor");
+					if( error )
+						System.out.println( "ERROR: No existe ese autor" );
 
 					break;
 				case 3:
@@ -88,14 +88,14 @@ public class pruebaDisco{
 					genero = tecladoString();
         
 					for( int i = 0 ; i < album.length ; i++ )
-						try {
-							if( album[i].getGenero().equals(genero) && album[i].getCodigo() != "LIBRE") {
-								System.out.println(album[i]);
+						try{
+							if(  album[i].getGenero().equals( genero ) && album[i].getCodigo() != "LIBRE"  ){
+								System.out.println( album[i] );
 								error = false;
 								}
-							}catch(NullPointerException ex) {}
+							}catch( NullPointerException ex ){}
         
-					if(error == true)
+					if( error )
 						System.out.println("ERROR: No existe ese genero");
 
 					break;
@@ -160,19 +160,19 @@ public class pruebaDisco{
     
     
 		do{
-			System.out.println("\n\nCOLECCIÓN DE DISCOS");
-			System.out.println("===================");
-			System.out.println("1. Listado");
-			System.out.println("2. Nuevo disco");
-			System.out.println("3. Modificar");
-			System.out.println("4. Borrar");
-			System.out.println("5. Salir");
-			System.out.print("Introduzca una opción: ");
+			System.out.println( "\n\nCOLECCIÓN DE DISCOS" );
+			System.out.println( "===================" );
+			System.out.println( "1. Listado" );
+			System.out.println( "2. Nuevo disco" );
+			System.out.println( "3. Modificar" );
+			System.out.println( "4. Borrar" );
+			System.out.println( "5. Salir" );
+			System.out.print( "Introduzca una opción: " );
 			opcion = tecladoInt();
       
 			switch( opcion ){
 				case 1:
-					System.out.println("Elegir listado");
+					System.out.println( "Elegir listado" );
 					filtrar( album );
 					break;
         
@@ -184,10 +184,10 @@ public class pruebaDisco{
 						primeraLibre++;
 						// Si se sobrepasa el máximo de discos, se impide crear más.
 						if( error = primeraLibre >= N ){
-							System.out.println("Album lleno. Borre algún disco para crear otro nuevo.");
+							System.out.println( "Album lleno. Borre algún disco para crear otro nuevo." );
 							break;
 							}
-						}while(!album[primeraLibre].getCodigo().equals("LIBRE") );
+						}while(  !album[primeraLibre].getCodigo().equals( "LIBRE" )  );
         
 					if( !error ){
 						System.out.println( "\nNUEVO DISCO" );
@@ -294,8 +294,12 @@ public class pruebaDisco{
 						System.out.println( "No existe ese código." );
         
 					break;
+				case 5:
+					System.out.println( "Saliendo..." );
+					break;
 				default:
-      
+					System.out.println( "Opción incorrecta" );
+
 				} // switch
 			}while( opcion != 5 );
 		}
