@@ -40,7 +40,7 @@ public class pruebaProducto {
 		//Bucle for para recorrer el array
 		for( int i = 0 ; i < almacen.length ; i++ )
 			//Estructura if para retornar "false" si se encuentra un c�digo igual al de "codigo"
-			if(( almacen[i].getCodigo() ).equals( codigo )  )
+			if(  ( almacen[i].getCodigo() ).equals( codigo )  )
 				return false;
 		//Retorna true si no se encuentra nada
 		return true;
@@ -216,7 +216,7 @@ public class pruebaProducto {
 								System.out.println( "�Cu�l ser� el nuevo stock?" );
 								System.out.println( "Stock actual - "+almacen[i].getStock() );
 								recogeDatosInt = tecladoInt();
-								}while( recogeDatosInt < almacen[i].getStock() );
+								}while( error = recogeDatosInt < almacen[i].getStock() );
 							error = false;
 							almacen[i].setStock( recogeDatosInt );
 							System.out.println( "Stock actualizado." );
@@ -243,7 +243,7 @@ public class pruebaProducto {
 								System.out.println( "�Cu�l ser� el nuevo stock?" );
 								System.out.println( "Stock actual - " + almacen[i].getStock() );
 								recogeDatosInt = tecladoInt();
-								}while( recogeDatosInt > almacen[i].getStock() );
+								}while( error = recogeDatosInt > almacen[i].getStock() );
                
 							error = false;
 							almacen[i].setStock( recogeDatosInt );
