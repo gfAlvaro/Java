@@ -232,7 +232,7 @@ public class pruebaDisco{
 					System.out.print( "Por favor, introduzca el código del disco cuyos datos desea cambiar: " );
 					codigoIntroducido = tecladoString();
   
-					for(  i = -1 ; !( ( album[i].getCodigo() ).equals( codigoIntroducido ) ) ; i++  ){}
+					for(  i = 0 ; !( ( album[i].getCodigo() ).equals( codigoIntroducido ) ) ; i++  ){}
          
 					System.out.println( "Introduzca los nuevos datos del disco o INTRO para dejarlos igual." );
 					System.out.println( "Código: " + album[i].getCodigo() );
