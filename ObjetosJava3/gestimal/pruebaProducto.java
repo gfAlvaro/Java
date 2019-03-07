@@ -82,12 +82,10 @@ public class pruebaProducto {
 				case 1:
 					// Listado
 					//Bucle for para recorrer el array
-					for( int i = 0 ; i < almacen.length ; i++ ) {
+					for( int i = 0 ; i < almacen.length ; i++ )
 						//Estructura if para mostrar los productos introducidos por el usuario
-						if(almacen[i].getCodigo() != "LIBRE") {
-							System.out.println(almacen[i]);    
-							}
-						}
+						if( almacen[i].getCodigo() != "LIBRE" )
+							System.out.println(almacen[i]);
 					break;
            
 				case 2:
@@ -98,11 +96,11 @@ public class pruebaProducto {
 					do{
 						primeraLibre++;
 						// Si se sobrepasa el m�ximo de productos, se impide crear m�s.
-						if(error = primeraLibre >= N ){
+						if( error = primeraLibre >= N ){
 							System.out.println("Almac�n lleno. De de baja alg�n producto para dar de alta a otro.");
 							break;
 							}
-						}while(!almacen[primeraLibre].getCodigo().equals("LIBRE") );
+						}while(  !almacen[primeraLibre].getCodigo().equals( "LIBRE" )  );
            
 					if( !error ){
 						System.out.println( "\n======NUEVO PRODUCTO======" );             
@@ -115,7 +113,7 @@ public class pruebaProducto {
 								System.out.println( "ERROR: C�digo ya existente." );
 							System.out.print( "C�digo: " );
 							recogeDatosCadena = tecladoString();
-							}while(error = !verificaCodigo(recogeDatosCadena, almacen));
+							}while(  error = !verificaCodigo( recogeDatosCadena , almacen )  );
              
 						almacen[primeraLibre].setCodigo( recogeDatosCadena );
              
@@ -158,13 +156,13 @@ public class pruebaProducto {
 
 				case 4:
 					// Modificar
-					System.out.println("Introduzca el código del elemento a modificar");
+					System.out.println( "Introduzca el código del elemento a modificar" );
 					recogeDatosCadena = tecladoString();
 
 					for( k = 0 ; almacen[k].getCodigo() == recogeDatosCadena ; k++ ){}
  
 					do {
-						System.out.println( "Elija qué elemento desea modificar: ");
+						System.out.println( "Elija qué elemento desea modificar:" );
 						System.out.println( " 1 para la descripcion." );
 						System.out.println( " 2 para el precio de compra." );
 						System.out.println( " 3 para el precio de venta." );
@@ -172,7 +170,7 @@ public class pruebaProducto {
 						System.out.println( " 5 para salir." );
 						elem = tecladoInt();
         	 
-						switch( elem ) {
+						switch( elem ){
 							case 1:
 								System.out.print( "Introduzca nueva descripcion: " );
 								almacen[k].setDescripcion( tecladoString() );
@@ -194,10 +192,10 @@ public class pruebaProducto {
 								System.out.println();
 								break;
 							case 5:
-								System.out.println("Saliendo...");
+								System.out.println( "Saliendo..." );
 								break;
 							default:
-								System.out.println("Opción incorrecta");
+								System.out.println( "Opción incorrecta" );
 							}
 						}while( elem != 5 );
 					break;
@@ -209,24 +207,24 @@ public class pruebaProducto {
 					System.out.print( "Por favor, introduzca el c�digo del producto del que desea aumentar el stock: " );
 					recogeDatosCadena = tecladoString();
 					//Bucle for para recorrer el array
-					for(int i = 0 ; i < N ; i++ )
+					for( int i = 0 ; i < N ; i++ )
 						if(  ( almacen[i].getCodigo() ).equals( recogeDatosCadena )  ){
 							error = false;
 							do{
-								if(error)
-									System.out.println("ERROR: Valor de stock no v�lido, debe ser mayor al anterior.");
-								System.out.println("�Cu�l ser� el nuevo stock?");
-								System.out.println("Stock actual - "+almacen[i].getStock());
+								if( error )
+									System.out.println( "ERROR: Valor de stock no v�lido, debe ser mayor al anterior." );
+								System.out.println( "�Cu�l ser� el nuevo stock?" );
+								System.out.println( "Stock actual - "+almacen[i].getStock() );
 								recogeDatosInt = tecladoInt();
-								}while(recogeDatosInt < almacen[i].getStock());
+								}while( recogeDatosInt < almacen[i].getStock() );
 							error = false;
-							almacen[i].setStock(recogeDatosInt);
+							almacen[i].setStock( recogeDatosInt );
 							System.out.println( "Stock actualizado." );
 							break;
 							}
 
-					if(error)
-						System.out.println("No existe ning�n producto con ese c�digo." );
+					if( error )
+						System.out.println( "No existe ning�n producto con ese c�digo." );
            
 					break;
            
@@ -236,36 +234,36 @@ public class pruebaProducto {
 					System.out.print( "Por favor, introduzca el c�digo del producto del que desea reducir el stock: " );
 					recogeDatosCadena = tecladoString();
 					//Bucle for para recorrer el array
-					for(int i = 0 ; i < N ; i++ )
+					for( int i = 0 ; i < N ; i++ )
 						if(  ( almacen[i].getCodigo() ).equals( recogeDatosCadena )  ){
 							error = false;
 							do{
 								if( error )
-									System.out.println("ERROR: Valor de stock no v�lido, debe ser menor al anterior.");
-								System.out.println("�Cu�l ser� el nuevo stock?");
-								System.out.println("Stock actual - "+almacen[i].getStock());
+									System.out.println( "ERROR: Valor de stock no v�lido, debe ser menor al anterior." );
+								System.out.println( "�Cu�l ser� el nuevo stock?" );
+								System.out.println( "Stock actual - " + almacen[i].getStock() );
 								recogeDatosInt = tecladoInt();
-								}while(recogeDatosInt > almacen[i].getStock());
+								}while( recogeDatosInt > almacen[i].getStock() );
                
 							error = false;
-							almacen[i].setStock(recogeDatosInt);
+							almacen[i].setStock( recogeDatosInt );
 							System.out.println( "Stock actualizado." );
 							break;
 							}
            
 					if( error )
-						System.out.println("No existe ning�n producto con ese c�digo." );
+						System.out.println( "No existe ning�n producto con ese c�digo." );
 
 					break;
 
 				case 7:
 					// Salir
-					System.out.println("Saliendo...");
+					System.out.println( "Saliendo..." );
 					break;
 				default:
 					System.out.println( "Opción incorrecta" );
 				}
-			}while(opcion != 7);
+			}while( opcion != 7 );
 		}
 	
 	} // Fin del programa
