@@ -2,6 +2,8 @@
  * Monedas.java
  * Clase con el método para devolver el cambio
  * de una cantidad dada, dando prioridad a billetes y monedas más grandes.
+ * Nota: si se usa la interfaz gráfica, el método main no es necesario,
+ * ni el paquete java.util.Scanner.
  * @author Alvaro Garcia Fuentes
  */
 package cajero;
