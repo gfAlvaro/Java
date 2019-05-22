@@ -45,9 +45,8 @@ public class Almacen{
 	 * @see devolverIndice
 	 */
 	public Articulo devolverArticulo( int c ){
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c ) 
-				return almacen.get(i);
+			if( almacen.get(c).getCodigo() == c ) 
+				return almacen.get(c);
 			
 		return null;
 		}
@@ -61,9 +60,8 @@ public class Almacen{
 	 */
 	public int devolverIndice( int c ){
 		
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c )
-				return i;
+			if( almacen.get(c).getCodigo() == c )
+				return c;
 
 		return -1;
 		}
