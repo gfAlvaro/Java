@@ -25,7 +25,7 @@ public class Articulo{
 	 * @param pV
 	 * @param s
 	 */
-	public Articulo( String d , double pC , double pV , int s ) throws Exception {
+	public Articulo( String d , double pC, double pV , int s ) throws Exception {
 		setCodigo();
 		setDescripcion(d);
 		setPrecioCompra(pC);

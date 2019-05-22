@@ -31,12 +31,10 @@ public class Almacen{
 	 * @see anadirArticulo
 	 */
 	public boolean retirarArticulo( int c ){
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c ){
-				almacen.remove(i);
-				return true;
-				}
-
+		if( almacen.get(c).getCodigo() == c ){
+			almacen.remove(c);
+			return true;
+			}
 		return false;
 		}
   
