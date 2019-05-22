@@ -4,14 +4,14 @@
  * @author Alvaro Garcia Fuentes
  * @author Rafael Jesus Nieto Cardador
  */
-package GESTIMALMejorado;
+package almacen;
 
 import java.util.ArrayList;
 
 public class Almacen{
 
 	//Atributos
-	ArrayList<Producto> almacen = new ArrayList<Producto>();
+	ArrayList<Articulo> almacen = new ArrayList<Articulo>();
   
 	//Metodos
   
@@ -20,24 +20,24 @@ public class Almacen{
 	 * @param p Objeto producto
 	 * @see retirarArticulo
 	 */
-	public void anadirArticulo( Producto p ){
+	public void anadirArticulo( Articulo p ){
 		almacen.add(p);
 		}
   
 	/**
 	 * Retira un producto del arraylist
 	 * @param c Codigo del producto
+	 * return boolean
 	 * @see anadirArticulo
 	 */
-	public void retirarArticulo( int c ){
+	public boolean retirarArticulo( int c ){
 		for( int i = 0 ; i < almacen.size() ; i++ )
 			if( almacen.get(i).getCodigo() == c ){
 				almacen.remove(i);
-				System.out.println( "Producto retirado con �xito." );
-				break;
+				return true;
 				}
 
-		System.out.println( "Producto no encontrado." );
+		return false;
 		}
   
 	/**
@@ -46,7 +46,7 @@ public class Almacen{
 	 * @return Producto
 	 * @see devolverIndice
 	 */
-	public Producto devolverArticulo( int c ){
+	public Articulo devolverArticulo( int c ){
 		for( int i = 0 ; i < almacen.size() ; i++ )
 			if( almacen.get(i).getCodigo() == c ) 
 				return almacen.get(i);
