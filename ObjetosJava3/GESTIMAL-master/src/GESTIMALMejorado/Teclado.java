@@ -9,23 +9,21 @@ import java.util.InputMismatchException;
 public class Teclado{
 	
 	public static double doble() throws InputMismatchException {
+		@SuppressWarnings("resource")
 		Scanner tec = new Scanner( System.in );
-		double salida = tec.nextDouble();
-		tec.close();
-		return salida;
+		return tec.nextDouble();
 		}
 
 	public static int entero() throws InputMismatchException {
+		@SuppressWarnings("resource")
 		Scanner tec = new Scanner( System.in );
-		int salida = tec.nextInt();
-		tec.close();
-		return salida;
+		return tec.nextInt();
 		}
 	
 	public static String cadena() throws InputMismatchException {
+		@SuppressWarnings("resource")
 		Scanner tec = new Scanner( System.in );
-		String salida = tec.nextLine();
-		tec.close();
-		return salida;
+		return tec.nextLine();
 		}
+	
  	} // Fin de la clase

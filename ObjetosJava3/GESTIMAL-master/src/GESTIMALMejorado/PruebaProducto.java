@@ -40,37 +40,37 @@ public class PruebaProducto {
 			System.out.println( "7. Salida de mercancia" );
 			System.out.println( "8. Salir" );
 			
-			do {
-				try {
+			do{
+				try{
 					System.out.println( "Introduzca una opcion" );
 					opcion = Teclado.entero();
-				} catch (InputMismatchException e) {
+				}catch( InputMismatchException e ){
 					error = true;
-					System.out.println( "ERROR: entrada incorrecta." );
+					System.out.println( "ERROR: tipo de dato de entrada incorrecto." );
 					}
 				}while( error );
 
-					//Estructura switch para manejar el men�
+					// Estructura switch para manejar el menu
 				switch( opcion ){
 				case 1:
 					// Listado
-					System.out.println(almacen);
+					System.out.println( almacen );
 					break;
 				case 2:
-					//Mostrar producto
+					// Mostrar producto
 					System.out.println( "\n======MOSTRAR PRODUCTO======" );
 					
-					try {
+					try{
 						System.out.println( "Introduzca el codigo del producto." );
 						codigo = Teclado.entero();
-						if(almacen.devolverArticulo(codigo ) == null) {
-						  System.out.println( "Producto no encontrado." );
-						}else {
-						  System.out.println( almacen.devolverArticulo( codigo ) );
-						}
-					} catch ( NumberFormatException e ) {
+						if( almacen.devolverArticulo( codigo ) == null )
+							System.out.println( "Producto no encontrado." );
+						else
+							System.out.println( almacen.devolverArticulo( codigo ) );
+							
+					}catch( NumberFormatException e ){
 						System.out.println( "Error en la entrada de datos." );
-					} catch ( ArrayIndexOutOfBoundsException  i ){
+					}catch( ArrayIndexOutOfBoundsException  i ){
 						System.out.println( "ERROR: codigo incorrecto" );
 						}
 					break;
@@ -105,11 +105,11 @@ public class PruebaProducto {
 					}catch( InputMismatchException e ){
 						System.out.println( "ERROR: Entrada incorrecta." );
 						}
-					try {
+					
+					try{
 						Articulo producto = new Articulo( d , pC , pV , s );
 						almacen.anadirArticulo( producto );
 						System.out.println( "Producto añadido con exito." );
-
 					}catch( Exception g){
 						System.out.println( "ERROR: no se pudo añadir el producto." );
 						}
@@ -119,17 +119,17 @@ public class PruebaProducto {
 					// Baja
 					System.out.println( "\n======DAR DE BAJA PRODUCTO======" );
 			
-					try {
+					try{
 						System.out.println( "Introduzca el codigo del producto a eliminar." );
 						almacen.retirarArticulo( Teclado.entero() );        
-					} catch ( InputMismatchException e ){
+					}catch( InputMismatchException e ){
 						System.out.println( "ERROR: Entrada incorrecta." );
 						}
 					break;
 				case 5:
 					// Modificar
 					System.out.println( "\n======MODIFICAR EL PRODUCTO======" );
-					try {
+					try{
 						System.out.println( "Introduzca el codigo del producto a modificar" );
 						indice = almacen.devolverIndice( Teclado.entero() );					
 					
@@ -143,7 +143,7 @@ public class PruebaProducto {
 					
 						try{	
 							System.out.println( "Precio de compra: " + almacen.almacen.get( indice ).getPrecioCompra() );
-							System.out.println( "Nuevo precio de compra: ");
+							System.out.println( "Nuevo precio de compra: " );
 							almacen.almacen.get( indice ).setPrecioCompra( Teclado.doble() );
 						}catch( InputMismatchException e ){
 							System.out.println( "ERROR: entrada incorrecta." );
@@ -207,10 +207,10 @@ public class PruebaProducto {
 						System.out.println( "Introduzca el codigo del articulo" );
 						indice = almacen.devolverIndice( Teclado.entero() );
 						
-						try {
-						System.out.println( "Introduzca la cantidad que desea restar al stock" );
-						almacen.almacen.get( indice ).reducirExistencias( Teclado.entero() );
-						System.out.println( "Stock actualizado" );
+						try{
+							System.out.println( "Introduzca la cantidad que desea restar al stock" );
+							almacen.almacen.get( indice ).reducirExistencias( Teclado.entero() );
+							System.out.println( "Stock actualizado" );
 						}catch( InputMismatchException e ){
 							System.out.println( "ERROR: entrada incorrecta." );
 						}catch( Exception g ){
@@ -230,7 +230,7 @@ public class PruebaProducto {
 					break;
 				default:
 					// Opcion incorrecta
-					System.out.println( "Opcion incorrecta" );
+					System.out.println( "Opcion incorrecta." );
 				}
 			
 			}while( opcion != 8 );			
