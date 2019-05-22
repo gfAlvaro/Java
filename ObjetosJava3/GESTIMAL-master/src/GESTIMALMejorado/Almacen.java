@@ -13,15 +13,16 @@ public class Almacen{
 	//Atributos
 	ArrayList<Articulo> almacen = new ArrayList<Articulo>();
   
-	//Metodos
-  
+	//Metodos 
 	/**
 	 * Anade un producto al arraylist
 	 * @param p Objeto producto
 	 * @see retirarArticulo
 	 */
-	public void anadirArticulo( Articulo p ){
-		almacen.add(p);
+	public void anadirArticulo( String d, double pC, double pV, int s ) throws Exception {
+
+		Articulo producto = new Articulo( d , pC , pV , s );
+		almacen.add(producto);
 		}
   
 	/**
@@ -45,8 +46,8 @@ public class Almacen{
 	 * @see devolverIndice
 	 */
 	public Articulo devolverArticulo( int c ){
-			if( almacen.get(c).getCodigo() == c ) 
-				return almacen.get(c);
+		if( almacen.get(c).getCodigo() == c ) 
+			return almacen.get(c);
 			
 		return null;
 		}

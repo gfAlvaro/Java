@@ -107,8 +107,7 @@ public class PruebaProducto {
 						}
 					
 					try{
-						Articulo producto = new Articulo( d , pC , pV , s );
-						almacen.anadirArticulo( producto );
+						almacen.anadirArticulo( d , pC , pV , s );
 						System.out.println( "Producto añadido con exito." );
 					}catch( Exception g){
 						System.out.println( "ERROR: no se pudo añadir el producto." );
@@ -199,9 +198,10 @@ public class PruebaProducto {
 						System.out.println( "ERROR: entrada incorrecta." );
 						}
 					break;
+					
 				case 7:
 					// Salida de mercancia
-					System.out.println( "\n======SALIDA DE MERCANC�A======" );
+					System.out.println( "\n======SALIDA DE MERCANCIA======" );
 					
 					try{
 						System.out.println( "Introduzca el codigo del articulo" );

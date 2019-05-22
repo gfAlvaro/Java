@@ -116,7 +116,7 @@ public class Articulo{
 	 * @param pv
 	 * @see getPrecioVenta
 	 */
-	public void setPrecioVenta( double pv ) throws Exception{
+	public void setPrecioVenta( double pv ) throws Exception {
 		if( pv < 0 ){
 			this.precioVenta = 0;
 			throw new Exception();
@@ -146,8 +146,8 @@ public class Articulo{
 	public void incrementarExistencias( int c ) throws Exception {
 		if( c < 0 )
 			throw new Exception();
-			
-		this.setStock( this.getStock() + c );
+		else
+			this.setStock( this.getStock() + c );
 		}
 	/**
 	 * Decrementa el stock del producto
@@ -155,9 +155,9 @@ public class Articulo{
 	 * @see incrementarExistencias
 	 */
 	public void reducirExistencias( int c ) throws Exception { 
-		if( this.getStock() - c < 0 ){
+		if( this.getStock() - c < 0 )
 			throw new Exception();
-		}else
+		else
 			this.setStock( this.getStock() - c );
 		}
 
@@ -172,5 +172,5 @@ public class Articulo{
 				+ "\nPrecio de venta - " + this.precioVenta
 				+ "\nStock - " + this.stock + "\n";
 		}
-	
+
 	} // Fin de la clase Producto
