@@ -11,37 +11,37 @@ import java.util.Scanner;
 
 public class Teclado{
 
-	/**
-	 * Método para leer un double por teclado
-	 * @return double
-	 * @see entero, cadena
-	 */
-	public static double doble() throws NumberFormatException {
-		@SuppressWarnings("resource")
-		Scanner teclado = new Scanner( System.in );   
-		return teclado.nextDouble();
-		}
-	
-	/**
-	 * Método para leer un entero por teclado
-	 * @return int
-	 * @see doble, cadena
-	 */
-	public static int entero() throws NumberFormatException {
-		@SuppressWarnings("resource")
-		Scanner teclado = new Scanner( System.in );   
-		return teclado.nextInt();
-		}
-	  
-	/**
-	 * Método para leer una cadena por teclado
-	 * @return String
-	 * @see doble, entero
-	 */
-	public static String cadena() throws NumberFormatException {
-		@SuppressWarnings("resource")
-		Scanner teclado = new Scanner( System.in );   
-		return teclado.nextLine();
-		}
+    /**
+     * Método para leer un double por teclado
+     * @return double
+     * @see entero, cadena
+     */
+    public static double doble() throws NumberFormatException {
+        @SuppressWarnings("resource")
+        Scanner teclado = new Scanner( System.in );   
+        return teclado.nextDouble();
+        }
 
-	} // Fin de la clase Teclado
+    /**
+     * Método para leer un entero por teclado
+     * @return int
+     * @see doble, cadena
+     */
+    public static int entero() throws NumberFormatException {
+        @SuppressWarnings("resource")
+        Scanner teclado = new Scanner( System.in );
+        return teclado.nextInt();
+        }
+
+    /**
+     * Método para leer una cadena por teclado
+     * @return String
+     * @see doble, entero
+     */
+    public static String cadena() throws NumberFormatException {
+        @SuppressWarnings("resource")
+        Scanner teclado = new Scanner( System.in );   
+        return teclado.nextLine();
+        }
+
+    } // Fin de la clase Teclado
