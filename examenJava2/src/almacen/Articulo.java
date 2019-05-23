@@ -8,12 +8,12 @@ package almacen;
 public class Articulo{
 
     //Atributos
-    private int codigo;
-    private String descripcion;
-    private double precioCompra;
-    private double precioVenta;
-    private int stock;
-    private String iva;
+    private int  codigo;
+    private String  descripcion;
+    private double  precioCompra;
+    private double  precioVenta;
+    private int  stock;
+    private String  iva;
 
     private static int cantidadArticulos = 0;
 
