@@ -18,7 +18,8 @@ public class Almacen{
 	 * @param p Objeto producto
 	 * @see retirarArticulo
 	 */
-	public void anadirArticulo( Articulo p ){
+	public void anadirArticulo( String d, double pC, double pV, int c, String iva ) throws Exception {
+		Articulo p = new Articulo( d, pC, pV, c, iva );
 		almacen.add(p);
 		}
   
@@ -27,15 +28,12 @@ public class Almacen{
 	 * @param c Codigo del producto
 	 * @see anadirArticulo
 	 */
-	public void retirarArticulo( int c ){
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c ){
-				almacen.remove(i);
-				System.out.println( "Producto retirado con exito." );
-				break;
-				}
+	public void retirarArticulo( int c ) throws Exception {
 
-		System.out.println( "Producto no encontrado." );
+		if( almacen.get(c).getCodigo() == c )
+			almacen.remove(c);			
+		else
+			throw new Exception();
 		}
   
 	/**
@@ -45,9 +43,8 @@ public class Almacen{
 	 * @see devolverIndice
 	 */
 	public Articulo devolverArticulo( int c ){
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c ) 
-				return almacen.get(i);
+		if( almacen.get(c).getCodigo() == c ) 
+			return almacen.get(c);
 			
 		return null;
 		}
@@ -61,9 +58,8 @@ public class Almacen{
 	 */
 	public int devolverIndice( int c ){
 		
-		for( int i = 0 ; i < almacen.size() ; i++ )
-			if( almacen.get(i).getCodigo() == c )
-				return i;
+		if( almacen.get(c).getCodigo() == c )
+			return c;
 
 		return -1;
 		}

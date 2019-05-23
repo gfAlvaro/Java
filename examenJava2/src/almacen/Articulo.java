@@ -15,6 +15,8 @@ public class Articulo{
 	private int stock;
 	private String iva;
 
+	private static int cantidadArticulos = 0;
+	
 	/**
 	 * Constructor parametrico
 	 * @param d
@@ -23,8 +25,8 @@ public class Articulo{
 	 * @param s
 	 * @param iva
 	 */
-	public Articulo( int codigo, String d , double pC , double pV , int s , String iva ) throws IvaInvalidoException {
-		setCodigo( codigo );
+	public Articulo( String d , double pC , double pV , int s , String iva ) throws Exception {
+		setCodigo( );
 		setDescripcion( d );
 		setPrecioCompra( pC );
 		setPrecioVenta( pV );
@@ -93,8 +95,9 @@ public class Articulo{
 	 * @param codigo
 	 * @see getCodigo
 	 */
-	private void setCodigo( int codigo ){
-		this.codigo = codigo;
+	private void setCodigo( ){
+		this.codigo = cantidadArticulos;
+		cantidadArticulos++;
 		}
 
 	/**
@@ -111,11 +114,10 @@ public class Articulo{
 	 * @param pc
 	 * @see getPrecioCompra
 	 */
-	public void setPrecioCompra( double pc ){
-		if( pc < 0 ){
-			this.precioCompra = 0;
-			System.out.println( "ERROR: El precio de compra no puede ser negativo" );
-		}else
+	public void setPrecioCompra( double pc ) throws Exception {
+		if( pc < 0 )
+			throw new Exception();
+		else
 			this.precioCompra = pc;
 		}
   
@@ -124,11 +126,10 @@ public class Articulo{
 	 * @param pv
 	 * @see getPrecioVenta
 	 */
-	public void setPrecioVenta( double pv ){
-		if( pv < 0 ){
-			this.precioVenta = 0;
-			System.out.println( "ERROR: El precio de venta no puede ser negativo." );
-		}else
+	public void setPrecioVenta( double pv ) throws  Exception {
+		if( pv < 0 )
+			throw new Exception();
+		else
 			this.precioVenta = pv;
 		}
   
@@ -137,11 +138,10 @@ public class Articulo{
 	 * @param s
 	 * @see getStock
 	 */
-	public void setStock( int s ){
-		if( s < 0 ){
-			this.stock = 0;
-			System.out.println( "ERROR: El stock no puede ser negativo" );
-		}else
+	public void setStock( int s ) throws Exception {
+		if( s < 0 )
+			throw new Exception();
+		else
 			this.stock = s;	
 		}
   
@@ -151,9 +151,9 @@ public class Articulo{
 	 * @param c Cantidad que se suma al stock
 	 * @see reducirExistencias
 	 */
-	public void incrementarExistencias( int c ){
+	public void incrementarExistencias( int c ) throws Exception {
 		if( c < 0 )
-			System.out.println( "ERROR: No se puede decrementar el stock." );
+			throw new Exception();
 			
 		this.setStock( this.getStock() + c );
 		}
@@ -162,9 +162,9 @@ public class Articulo{
 	 * @param c Cantidad que se resta al stock
 	 * @see incrementarExistencias
 	 */
-	public void reducirExistencias( int c ){ 
+	public void reducirExistencias( int c ) throws Exception { 
 		if( this.getStock() - c < 0 )
-			System.out.println( "ERROR: El stock no puede ser negativo" );
+			throw new Exception();
 		else
 			this.setStock( this.getStock() - c );
 		}
