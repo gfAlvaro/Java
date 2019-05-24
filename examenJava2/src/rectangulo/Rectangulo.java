@@ -6,11 +6,12 @@
 package rectangulo;
 
 public class Rectangulo{
-	
+
     //Atributos privados de instancia
 
-    private int __ancho;
-    private int __alto;
+    private int  ancho;
+    private int  alto;
+    
     /**
      * Constructor paramétrico
      * @param ancho
@@ -26,13 +27,13 @@ public class Rectangulo{
      * @return int
      * @see setAncho, getAlto, setAlto
      */
-    public int getAncho(){ return this.__ancho; }
+    public int getAncho(){ return this.ancho; }
 
     /**
      * muestra el atributo alto
      * @return int
      */
-    public int getAlto(){ return this.__alto; }
+    public int getAlto(){ return this.alto; }
 
     /**
      * modifica el atributo ancho.
@@ -43,10 +44,13 @@ public class Rectangulo{
      * @see getAncho, getAlto, setAlto
      */
     protected void setAncho( int ancho ) throws ArithmeticException {
-        if(  ( ancho <= 0 ) || ( ancho > 10 )  )
+
+    	if(  ( ancho <= 0 ) || ( ancho > 10 )  ){
             throw new ArithmeticException();
-        else
-            this.__ancho = ancho;
+            }
+        else{
+            this.ancho = ancho;
+            }
         }
     
     /**
@@ -57,10 +61,13 @@ public class Rectangulo{
      * @throws ArithmeticException
      */
     protected void setAlto( int alto ) throws ArithmeticException {
-        if(  ( alto <= 0 ) || ( alto > 10 )  )
+    	
+        if(  ( alto <= 0 ) || ( alto > 10 )  ){
             throw new ArithmeticException();
-        else
-            this.__alto = alto;
+            }
+        else{
+            this.alto = alto;
+            }
         }
 
     /**
@@ -71,9 +78,17 @@ public class Rectangulo{
 
         String resultado = "";
 
-        for( int i = 0 ; i < this.__alto ; i++ ){
-            for( int j = 0 ; j < this.__ancho ; j++ )
-                resultado += "[]";
+        for( int i = 0 ; i < this.alto ; i++ ){
+        	
+            for( int j = 0 ; j < this.ancho ; j++ ){
+            	
+            	if(  ( i == 0 || j == 0 ) || ( i == this.alto - 1 || j == this.ancho-1 )  ){
+                    resultado += "[]";
+                    }
+            	else{
+                    resultado += "  ";
+                    }
+                }
 
             resultado += "\n";
             }
