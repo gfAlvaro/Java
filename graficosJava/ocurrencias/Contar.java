@@ -40,8 +40,7 @@ public class Contar{
             if(  i.contains( palabra )  ){
                 salida += 1; }}
 
-        return salida;
-        }
+        return salida; }
 
     public static void main( String[] args ){
 
@@ -60,7 +59,6 @@ public class Contar{
             ocurrencias = ContarOcurrencias( fichero, palabra );
             System.out.println( "Hay " + ocurrencias + " ocurrencias." );
         }catch(Exception e ){
-            System.out.println( e.getMessage() ); }
-        }
+            System.out.println( e.getMessage() ); }}
 
     } // Fin del programa
