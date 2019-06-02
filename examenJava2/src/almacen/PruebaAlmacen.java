@@ -12,16 +12,20 @@ public class PruebaAlmacen{
 
     public static Almacen almacen = new Almacen();
 
-    public static void mostrarArticulo() throws Exception{
+    public static void mostrarArticulo() throws Exception {
     
         int codigo;
     	
         System.out.println( "Introduzca el codigo del articulo." );
         codigo = Teclado.entero();
+        
         if(  almacen.devolverArticulo( codigo ) == null  ){
-            System.out.println( "Articulo no encontrado." ); }
+            System.out.println( "Articulo no encontrado." );
+        }
         else{
-            System.out.println(  almacen.devolverArticulo( codigo )  ); }}
+            System.out.println(  almacen.devolverArticulo( codigo )  );
+        }
+    }
     
     public static void alta() throws Exception {
     	
@@ -40,12 +44,14 @@ public class PruebaAlmacen{
         System.out.println( "Introduzca el stock del articulo." );
         s = Teclado.entero();		  
         iva = menuIva.menu();
-        almacen.anadirArticulo( d, pC, pV, s, iva ); }
+        almacen.anadirArticulo( d, pC, pV, s, iva );
+    }
     
     public static void baja() throws Exception {
     	
         System.out.println( "Introduzca el codigo del articulo a eliminar." );
-        almacen.retirarArticulo( Teclado.entero() ); }
+        almacen.retirarArticulo( Teclado.entero() );
+    }
     
     public static void modificarArticulo() throws Exception {
     	
@@ -72,7 +78,8 @@ public class PruebaAlmacen{
         almacen.devolverArticulo( indice ).setStock( Teclado.entero() );
         
         iva = menuIva.menu();
-        almacen.devolverArticulo( indice ).setIva( iva ); }
+        almacen.devolverArticulo( indice ).setIva( iva );
+    }
     
     public static void entradaMercancia() throws Exception {
     	
@@ -82,7 +89,8 @@ public class PruebaAlmacen{
         indice = almacen.devolverIndice( Teclado.entero() );
         System.out.println( "Introduzca la cantidad que desea sumar al stock" );
         almacen.devolverArticulo(indice).incrementarExistencias( Teclado.entero() );
-        System.out.println( "Stock actualizado" ); }
+        System.out.println( "Stock actualizado" );
+    }
     
     public static void salidaMercancia() throws Exception {
     	
@@ -92,7 +100,8 @@ public class PruebaAlmacen{
         indice = almacen.devolverIndice( Teclado.entero() );							
         System.out.println( "Introduzca la cantidad que desea restar al stock" );
         almacen.devolverArticulo(indice).reducirExistencias( Teclado.entero() );
-        System.out.println( "Stock actualizado" ); }
+        System.out.println( "Stock actualizado" );
+    }
     
     public static void main( String[] args ){
 
@@ -117,11 +126,13 @@ public class PruebaAlmacen{
                 	error = false;
                     System.out.println( "Introduzca una opción" );
                     opcion = Teclado.entero();
-                }catch( InputMismatchException ie ){
+                }
+                catch( InputMismatchException ie ){
                     error = true;
-                    System.out.println( "ERROR: entrada incorrecta." ); }
+                    System.out.println( "ERROR: entrada incorrecta." );
+                }
                 
-                }while( error );
+            }while( error );
             
             //Estructura switch para manejar el men�
             switch( opcion ){
@@ -135,12 +146,16 @@ public class PruebaAlmacen{
 
                 try{
                     mostrarArticulo();
-                }catch( InputMismatchException ei ){
+                }
+                catch( InputMismatchException ei ){
                     System.out.println( "ERROR: entrada de datos no válida." );
-                }catch( ArrayIndexOutOfBoundsException i ){
+                }
+                catch( ArrayIndexOutOfBoundsException i ){
                     System.out.println( "ERROR: codigo incorrecto." );
-                }catch( Exception e ){
-                    System.out.println( "ERROR: codigo incorrecto." ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: codigo incorrecto." );
+                }
                 
                 break;
                 
@@ -151,12 +166,16 @@ public class PruebaAlmacen{
                 try{
                     alta();
                     System.out.println( "Articulo añadido con éxito." );
-                }catch( InputMismatchException ie ){
+                }
+                catch( InputMismatchException ie ){
                     System.out.println( "ERROR: entrada incorrecta." );
-                }catch( IvaInvalidoException ie ){
+                }
+                catch( IvaInvalidoException ie ){
                     System.out.println( "ERROR: IVA incorrecto." );
-                }catch( Exception e ){
-                    System.out.println( "ERROR: no se pudo crear el artículo." ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: no se pudo crear el artículo." );
+                }
                 
                 break;	
 
@@ -166,10 +185,13 @@ public class PruebaAlmacen{
 
                 try{
                     baja();       
-                }catch( InputMismatchException ei ){
+                }
+                catch( InputMismatchException ei ){
                     System.out.println( "ERROR: Entrada incorrecta." );
-                }catch( Exception e ){
-                    System.out.println( "ERROR: no se pudo eliminar el artículo." ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: no se pudo eliminar el artículo." );
+                }
                 
                 break;
                 
@@ -179,12 +201,16 @@ public class PruebaAlmacen{
                 
                 try{
                     modificarArticulo();
-                }catch( IvaInvalidoException ie ){
+                }
+                catch( IvaInvalidoException ie ){
                     System.out.println( "ERROR: IVA incorrecto." );				
-                }catch( InputMismatchException ei ){
+                }
+                catch( InputMismatchException ei ){
                     System.out.println( "ERROR: entrada incorrecta." );
-                }catch( Exception e ){
-                    System.out.println( "ERROR: no se pudo modificar el articulo." ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: no se pudo modificar el articulo." );
+                }
 
                 break;
                 
@@ -194,10 +220,13 @@ public class PruebaAlmacen{
 
                 try{
                     entradaMercancia();
-                }catch( InputMismatchException ei ){
+                }
+                catch( InputMismatchException ei ){
                     System.out.println( "ERROR: entrada incorrecta." );					
-                }catch( Exception e ){
-                    System.out.println( "ERROR: no se pudo incrementar el stock" ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: no se pudo incrementar el stock" );
+                }
                 
                 break;
                 
@@ -207,10 +236,13 @@ public class PruebaAlmacen{
                 
                 try{
                     salidaMercancia();						
-                }catch( InputMismatchException ei ){
+                }
+                catch( InputMismatchException ei ){
                     System.out.println( "ERROR: entrada incorrecta." );
-                }catch( Exception e ){
-                    System.out.println( "ERROR: articulo no econtrado." ); }
+                }
+                catch( Exception e ){
+                    System.out.println( "ERROR: articulo no econtrado." );
+                }
                 
                 break;
             case 8:
@@ -219,8 +251,10 @@ public class PruebaAlmacen{
                 break;
             default:
                 // Opcion incorrecta
-                System.out.println( "Opción incorrecta" ); }
+                System.out.println( "Opción incorrecta" );
+            }
             
-            }while( opcion != 8 ); }
+        }while( opcion != 8 );
+    }
     
-    } // Fin del programa
+} // Fin del programa

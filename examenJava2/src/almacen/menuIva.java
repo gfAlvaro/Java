@@ -32,10 +32,12 @@ public class menuIva{
     	            resultado = "super reducido";
     	            break;
                 default:
-                    System.out.println( "Opción incorrecta." ); }
+                    System.out.println( "Opción incorrecta." );
+            }
             
-            }while(  ( tipoIva < 1 ) || ( tipoIva > 3 )  );
+        }while(  ( tipoIva < 1 ) || ( tipoIva > 3 )  );
 
-        return resultado; }
+        return resultado;
+    }
 
-    } // Fin de la clase MenuIVA
+} // Fin de la clase MenuIVA

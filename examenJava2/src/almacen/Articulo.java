@@ -31,13 +31,16 @@ public class Articulo implements Comparable<Articulo> {
         setPrecioCompra( pC );
         setPrecioVenta( pV );
         setStock( s );
-        setIva( iva ); }
+        setIva( iva );
+    }
 
     /**
      * devuelve el valor de iva
      * @return String
      */
-    public String getIva(){ return this.iva; }
+    public String getIva(){
+    	return this.iva;
+    }
 	
     /**
      * modifica el valor de iva
@@ -48,9 +51,11 @@ public class Articulo implements Comparable<Articulo> {
     public void setIva( String iva ) throws IvaInvalidoException {
     	
         if( iva == null ) {
-            throw new IvaInvalidoException( "Iva no válido" ); }
+            throw new IvaInvalidoException( "Iva no válido" );
+        }
         
-        this.iva = iva; }
+        this.iva = iva;
+    }
 
     // Otros getters
     /**
@@ -58,35 +63,45 @@ public class Articulo implements Comparable<Articulo> {
      * @return int
      * @see setCodigo
      */
-    public int getCodigo(){ return this.codigo; }
+    public int getCodigo(){
+        return this.codigo;
+    }
 
     /**
      * getter para descripcion
      * @return String
      * @see setDescripcion
      */
-    public String getDescripcion(){ return this.descripcion; }
+    public String getDescripcion(){
+        return this.descripcion;
+    }
 
     /**
      * getter para precioCompra
      * @return double
      * @see setPrecioCompra
      */
-    public double getPrecioCompra(){ return this.precioCompra; }
+    public double getPrecioCompra(){
+        return this.precioCompra;
+    }
 
     /**
   	 * getter para precioVenta
   	 * @return double
   	 * @see setPrecioVenta
   	 */
-    public double getPrecioVenta(){ return this.precioVenta; }
+    public double getPrecioVenta(){
+        return this.precioVenta;
+    }
 
     /**
      * getter para stock
      * @return int
      * @see setStock
      */
-    public int getStock(){ return this.stock; }
+    public int getStock(){
+        return this.stock;
+        }
 
     // Otros Setters
     /**
@@ -94,14 +109,18 @@ public class Articulo implements Comparable<Articulo> {
      * @param codigo
      * @see getCodigo
      */
-    private void setCodigo( ){ this.codigo = cantidadArticulos++; }
+    private void setCodigo( ){
+        this.codigo = cantidadArticulos++;
+    }
 
     /**
      * setter para descripcion
      * @param d
      * @see getDescripcion
       */
-    public void setDescripcion( String d ){ this.descripcion = d; }
+    public void setDescripcion( String d ){
+        this.descripcion = d;
+        }
 
     /**
      * setter para PrecioCompra
@@ -111,9 +130,11 @@ public class Articulo implements Comparable<Articulo> {
     public void setPrecioCompra( double pc ) throws Exception {
     	
         if( pc < 0 ){
-            throw new Exception(); }
+            throw new Exception();
+        }
         
-        this.precioCompra = pc; }
+        this.precioCompra = pc;
+    }
 
     /**
      * setter para precioVenta
@@ -122,9 +143,11 @@ public class Articulo implements Comparable<Articulo> {
      */
     public void setPrecioVenta( double pv ) throws  Exception {
         if( pv < 0 ){
-            throw new Exception(); }
+            throw new Exception();
+        }
         
-        this.precioVenta = pv; }
+        this.precioVenta = pv;
+    }
   
     /**
      * setter para stock
@@ -134,9 +157,11 @@ public class Articulo implements Comparable<Articulo> {
     public void setStock( int s ) throws Exception {
     	
         if( s < 0 ){
-            throw new Exception(); }
+            throw new Exception();
+        }
 
-        this.stock = s; }
+        this.stock = s;
+    }
   
     //Metodos  
     /**
@@ -147,9 +172,11 @@ public class Articulo implements Comparable<Articulo> {
     public void incrementarExistencias( int c ) throws Exception {
 
     	if( c < 0 ){
-            throw new Exception(); }
+            throw new Exception();
+        }
 
-        this.setStock( this.getStock() + c ); }
+        this.setStock( this.getStock() + c );
+    }
     
     /**
      * Decrementa el stock del producto
@@ -159,9 +186,11 @@ public class Articulo implements Comparable<Articulo> {
     public void reducirExistencias( int c ) throws Exception { 
     	
         if( this.getStock() - c < 0 ){
-            throw new Exception(); }
+            throw new Exception();
+        }
 
-        this.setStock( this.getStock() - c ); }
+        this.setStock( this.getStock() - c );
+    }
 
     /**
      * Metodo toString de la clase
@@ -173,7 +202,8 @@ public class Articulo implements Comparable<Articulo> {
                 + "\nPrecio de compra - " + this.precioCompra
 		        + "\nPrecio de venta - " + this.precioVenta
 		        + "\nStock - " + this.stock
-		        + "\nTipo de IVA - " + this.iva; }
+		        + "\nTipo de IVA - " + this.iva;
+    }
 
 	@Override
 	public int compareTo( Articulo articulo ){
@@ -181,12 +211,15 @@ public class Articulo implements Comparable<Articulo> {
 	    int salida = 0;
 	
 	    if( this.getCodigo() == articulo.getCodigo() ){
-	        salida = 0; }
+	        salida = 0;
+	    }
 	    
 	    if( this.getCodigo() != articulo.getCodigo() ){
-	        salida = 1; }
+	        salida = 1;
+	    }
 	    
-	    return salida; }
+	    return salida;
+	}
 
     @Override
     public int hashCode(){
@@ -196,7 +229,8 @@ public class Articulo implements Comparable<Articulo> {
 
         resultado = prime * resultado + this.getCodigo();
 
-        return resultado; }
+        return resultado;
+    }
 	
     @Override
     public boolean equals( Object objeto ){
@@ -204,22 +238,28 @@ public class Articulo implements Comparable<Articulo> {
         boolean salida = true;
 
         if( this == objeto ){
-            salida = true; }
+            salida = true;
+        }
         
         if( objeto == null ){
-            salida = false; }
+            salida = false;
+        }
         
         if( getClass() != objeto.getClass() ){
-            salida = false; }
+            salida = false;
+        }
 
         Articulo otro = ( Articulo ) objeto;
 
         if( this.getCodigo() != otro.getCodigo() ){
-            salida = false; }
+            salida = false;
+        }
         
         if( this.getCodigo() != otro.getCodigo() ){
-            salida = false; }
+            salida = false;
+        }
         
-        return salida; }
+        return salida;
+    }
 	
-    } // Fin de la clase Producto
+} // Fin de la clase Producto

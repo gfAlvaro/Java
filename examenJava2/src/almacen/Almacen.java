@@ -22,7 +22,7 @@ public class Almacen{
     public void anadirArticulo( String d, double pC, double pV, int c, String iva ) throws Exception {
         
         almacen.add(  new Articulo( d , pC , pV , c , iva )  );
-        }
+    }
 
     /**
      * Retira un producto del arraylist
@@ -30,13 +30,13 @@ public class Almacen{
      * @see anadirArticulo
      */
     public void retirarArticulo( int c ) throws Exception {
-    	//return almacen.remove(new Arcituculo(codigo));
-        if( almacen.get(c).getCodigo() != c ){
+
+    	if( almacen.get(c).getCodigo() != c ){
             throw new Exception();
-            }
+        }
         
         almacen.remove(c);
-        }
+    }
   
     /**
      * Devuelve un producto del arraylist
@@ -44,14 +44,14 @@ public class Almacen{
      * @return Producto
      * @see devolverIndice
      */
-    public Articulo devolverArticulo( int c ){
+    public Articulo devolverArticulo( int c ) throws Exception {
     	    	
-        if( almacen.get(c).getCodigo() == c ){
-            return almacen.get(c);
-            }
-        
-        return null;
+        if( almacen.get(c).getCodigo() != c ){
+            throw new Exception();
         }
+        
+        return almacen.get(c);
+    }
 
     /**
      * devuelve el codigo del elemento con indice dado,
@@ -61,13 +61,18 @@ public class Almacen{
      * @see devolverArticulo
      */
     public int devolverIndice( int c ){
-    	    	
+    	
+    	int salida;
+    	
         try{
-            return almacen.get(c).getCodigo();
-        }catch( IndexOutOfBoundsException o ){
-            return -1;
-            }
+            salida = almacen.get(c).getCodigo();
         }
+        catch( IndexOutOfBoundsException o ){
+            salida = -1;
+        }
+        
+        return salida;
+    }
 
     /**
      * método toString de la clase
@@ -80,9 +85,9 @@ public class Almacen{
         
         while( i.hasNext() ){
             cadena += i.next();
-            }
+        }
         
         return cadena;
-        }
+    }
 
-    } // Fin de la clase Almacen
+} // Fin de la clase Almacen

@@ -11,4 +11,4 @@ public class IvaInvalidoException extends Exception {
 
     public IvaInvalidoException( String cadena ){ super( cadena ); }
 
-    } // Fin de la clase
+} // Fin de la clase
