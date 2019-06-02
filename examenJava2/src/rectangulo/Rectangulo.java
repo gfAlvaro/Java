@@ -20,7 +20,7 @@ public class Rectangulo{
     Rectangulo( int ancho , int alto ){
         this.setAncho( ancho );
         this.setAlto( alto );
-        }
+    }
 
     /**
      * muestra el atributo ancho
@@ -47,11 +47,11 @@ public class Rectangulo{
 
     	if(  ( ancho <= 0 ) || ( ancho > 10 )  ){
             throw new ArithmeticException();
-            }
+        }
         else{
             this.ancho = ancho;
-            }
         }
+    }
     
     /**
      * modifica el atributo alto.
@@ -64,11 +64,11 @@ public class Rectangulo{
     	
         if(  ( alto <= 0 ) || ( alto > 10 )  ){
             throw new ArithmeticException();
-            }
+        }
         else{
             this.alto = alto;
-            }
         }
+    }
 
     /**
      * Dibuja el rectángulo por pantalla
@@ -84,15 +84,16 @@ public class Rectangulo{
             	
             	if(  ( i == 0 || j == 0 ) || ( i == this.alto - 1 || j == this.ancho-1 )  ){
                     resultado += "[]";
-                    }
+                }
             	else{
                     resultado += "  ";
-                    }
                 }
+            }
 
             resultado += "\n";
-            }
-        return resultado;
         }
+        
+        return resultado;
+    }
     
-    } // Fin de la clase Rectangulo
+} // Fin de la clase Rectangulo

@@ -29,7 +29,7 @@ public class testCuadrado{
             System.out.println( "Creado cuadrado3 con lado=" + cuadrado.getLado() );
         }catch( ArithmeticException e ){
             System.out.println( "ERROR: No se pudo crear el cuadrado, valor fuera de rango." );
-            }
+        }
 
         // Creamos dos cuadrados y los comparamos
         try{
@@ -42,7 +42,7 @@ public class testCuadrado{
 
             if(  cuadrado1.esIgual( cuadrado2 )  ){
                 System.out.println( "cuadrado1 y cuadrado2 son iguales" );
-                }
+            }
             
             cuadrado3 = new Cuadrado( 1 );
             System.out.println( "\nCreado cuadrado3 con lado = " + cuadrado3.getLado() );
@@ -53,7 +53,7 @@ public class testCuadrado{
 
             if(  cuadrado3.esDistinto( cuadrado4 )  ){
                 System.out.println( "cuadrado3 y cuadrado4 son distintos." );
-                }
+            }
             
             cuadrado5 = new Cuadrado( 4 );
             System.out.println( "\nCreado cuadrado5 con lado = " + cuadrado5.getLado() );
@@ -64,7 +64,7 @@ public class testCuadrado{
 
             if(  cuadrado5.esMayor( cuadrado6 )  ){
                 System.out.println( "cuadrado5 es mayor que cuadrado6." );
-                }
+            }
             
             cuadrado7 = new Cuadrado( 3 );
             System.out.println( "\nCreado cuadrado7 con lado = " + cuadrado7.getLado() );
@@ -75,7 +75,7 @@ public class testCuadrado{
 
             if(  cuadrado7.esMenor( cuadrado8 )  ){
                 System.out.println( "cuadrado7 es menor que cuadrado8." );
-                }
+            }
             
             cuadrado9 = new Cuadrado( 4 );
             System.out.println( "\nCreado cuadrado9 con lado = " + cuadrado9.getLado() );
@@ -86,7 +86,7 @@ public class testCuadrado{
 
             if(  cuadrado9.esMayorIgual( cuadrado10 )  ){
                 System.out.println( "cuadrado9 es mayor o igual que cuadrado10." );
-                }
+            }
             
             cuadrado11 = new Cuadrado( 3 );
             System.out.println( "\nCreado cuadrado11 con lado = " + cuadrado11.getLado() );
@@ -97,11 +97,11 @@ public class testCuadrado{
 
             if(  cuadrado11.esMenorIgual( cuadrado12 )  ){
                 System.out.println( "cuadrado11 es menor o igual que cuadrado12" );
-                }
+            }
             
             }catch( ArithmeticException e ){
                 System.out.println( "ERROR: No se pudieron crear los cuadrados" );
-                }
-        }
+            }
+    }
 
-    } // Fin del programa
+} // Fin del programa

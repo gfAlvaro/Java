@@ -20,7 +20,7 @@ public class testRectangulo {
             System.out.println( rectangulo1 );
         }catch( ArithmeticException e ){
             System.out.println( "ERROR: no se pudo crear rectangulo1, valores fuera de rango" );
-            }
+        }
 
         // Intentamos crear otro rectángulo con lados fuera del rango
         try{
@@ -30,7 +30,7 @@ public class testRectangulo {
             System.out.println( rectangulo2 );
         }catch( ArithmeticException e ){
             System.out.println( "ERROR: no se pudo crear rectangulo2, valores fuera de rango" );
-            }
         }
+    }
 
-    } // Fin del programa
+} // Fin del programa
