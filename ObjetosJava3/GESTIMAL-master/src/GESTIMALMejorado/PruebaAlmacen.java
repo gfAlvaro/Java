@@ -123,7 +123,7 @@ public class PruebaAlmacen{
             
             do{
                 try{
-                	error = false;
+                    error = false;
                     System.out.println( "Introduzca una opción" );
                     opcion = Teclado.entero();
                 }
