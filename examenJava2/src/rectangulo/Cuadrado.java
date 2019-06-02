@@ -100,7 +100,7 @@ public class Cuadrado extends Rectangulo implements Comparable<Cuadrado> {
      * @return boolean
      */
     public boolean esIgual( Cuadrado cuadrado ){
-        return this.compareTo( cuadrado ) == 0;
+        return this.equals( cuadrado );
         }
 
     /**
@@ -109,7 +109,7 @@ public class Cuadrado extends Rectangulo implements Comparable<Cuadrado> {
      * @return boolean
      */
     public boolean esDistinto( Cuadrado cuadrado ){
-        return this.compareTo( cuadrado ) != 0;
+        return !this.equals( cuadrado );
         }
     
     /**
