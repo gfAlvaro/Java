@@ -19,8 +19,7 @@ public class Teclado{
     public static double doble() throws NumberFormatException {
         @SuppressWarnings("resource")
         Scanner teclado = new Scanner( System.in );   
-        return teclado.nextDouble();
-        }
+        return teclado.nextDouble(); }
 
     /**
      * Método para leer un entero por teclado
@@ -30,8 +29,7 @@ public class Teclado{
     public static int entero() throws NumberFormatException {
         @SuppressWarnings("resource")
         Scanner teclado = new Scanner( System.in );
-        return teclado.nextInt();
-        }
+        return teclado.nextInt(); }
 
     /**
      * Método para leer una cadena por teclado
@@ -41,7 +39,6 @@ public class Teclado{
     public static String cadena() throws NumberFormatException {
         @SuppressWarnings("resource")
         Scanner teclado = new Scanner( System.in );   
-        return teclado.nextLine();
-        }
+        return teclado.nextLine(); }
 
     } // Fin de la clase Teclado

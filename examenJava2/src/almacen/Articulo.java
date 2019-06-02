@@ -5,7 +5,7 @@
  */
 package almacen;
 
-public class Articulo{
+public class Articulo implements Comparable<Articulo> {
 
     //Atributos
     private int  codigo;
@@ -31,8 +31,7 @@ public class Articulo{
         setPrecioCompra( pC );
         setPrecioVenta( pV );
         setStock( s );
-        setIva( iva );
-        }
+        setIva( iva ); }
 
     /**
      * devuelve el valor de iva
@@ -47,11 +46,11 @@ public class Articulo{
      * @throws IvaInvalidoException
      */
     public void setIva( String iva ) throws IvaInvalidoException {
-        if( iva == null )
-            throw new IvaInvalidoException( "Iva no válido" );
-        else
-            this.iva = iva;
-        }
+    	
+        if( iva == null ) {
+            throw new IvaInvalidoException( "Iva no válido" ); }
+        
+        this.iva = iva; }
 
     // Otros getters
     /**
@@ -95,19 +94,14 @@ public class Articulo{
      * @param codigo
      * @see getCodigo
      */
-    private void setCodigo( ){
-        this.codigo = cantidadArticulos;
-        cantidadArticulos++;
-        }
+    private void setCodigo( ){ this.codigo = cantidadArticulos++; }
 
     /**
      * setter para descripcion
      * @param d
      * @see getDescripcion
       */
-    public void setDescripcion( String d ){
-        this.descripcion = d;
-        }
+    public void setDescripcion( String d ){ this.descripcion = d; }
 
     /**
      * setter para PrecioCompra
@@ -115,11 +109,11 @@ public class Articulo{
      * @see getPrecioCompra
      */
     public void setPrecioCompra( double pc ) throws Exception {
-        if( pc < 0 )
-            throw new Exception();
-        else
-            this.precioCompra = pc;
-        }
+    	
+        if( pc < 0 ){
+            throw new Exception(); }
+        
+        this.precioCompra = pc; }
 
     /**
      * setter para precioVenta
@@ -127,11 +121,10 @@ public class Articulo{
      * @see getPrecioVenta
      */
     public void setPrecioVenta( double pv ) throws  Exception {
-        if( pv < 0 )
-            throw new Exception();
-        else
-            this.precioVenta = pv;
-        }
+        if( pv < 0 ){
+            throw new Exception(); }
+        
+        this.precioVenta = pv; }
   
     /**
      * setter para stock
@@ -139,11 +132,11 @@ public class Articulo{
      * @see getStock
      */
     public void setStock( int s ) throws Exception {
-        if( s < 0 )
-            throw new Exception();
-        else
-            this.stock = s;	
-        }
+    	
+        if( s < 0 ){
+            throw new Exception(); }
+
+        this.stock = s; }
   
     //Metodos  
     /**
@@ -152,22 +145,23 @@ public class Articulo{
      * @see reducirExistencias
      */
     public void incrementarExistencias( int c ) throws Exception {
-        if( c < 0 )
-            throw new Exception();
 
-        this.setStock( this.getStock() + c );
-        }
+    	if( c < 0 ){
+            throw new Exception(); }
+
+        this.setStock( this.getStock() + c ); }
+    
     /**
      * Decrementa el stock del producto
      * @param c Cantidad que se resta al stock
      * @see incrementarExistencias
      */
     public void reducirExistencias( int c ) throws Exception { 
-        if( this.getStock() - c < 0 )
-            throw new Exception();
-        else
-            this.setStock( this.getStock() - c );
-        }
+    	
+        if( this.getStock() - c < 0 ){
+            throw new Exception(); }
+
+        this.setStock( this.getStock() - c ); }
 
     /**
      * Metodo toString de la clase
@@ -179,7 +173,53 @@ public class Articulo{
                 + "\nPrecio de compra - " + this.precioCompra
 		        + "\nPrecio de venta - " + this.precioVenta
 		        + "\nStock - " + this.stock
-		        + "\nTipo de IVA - " + this.iva;
-        }
+		        + "\nTipo de IVA - " + this.iva; }
 
+	@Override
+	public int compareTo( Articulo articulo ){
+
+	    int salida = 0;
+	
+	    if( this.getCodigo() == articulo.getCodigo() ){
+	        salida = 0; }
+	    
+	    if( this.getCodigo() != articulo.getCodigo() ){
+	        salida = 1; }
+	    
+	    return salida; }
+
+    @Override
+    public int hashCode(){
+        
+        final int prime = 31;
+        int resultado = 1;
+
+        resultado = prime * resultado + this.getCodigo();
+
+        return resultado; }
+	
+    @Override
+    public boolean equals( Object objeto ){
+
+        boolean salida = true;
+
+        if( this == objeto ){
+            salida = true; }
+        
+        if( objeto == null ){
+            salida = false; }
+        
+        if( getClass() != objeto.getClass() ){
+            salida = false; }
+
+        Articulo otro = ( Articulo ) objeto;
+
+        if( this.getCodigo() != otro.getCodigo() ){
+            salida = false; }
+        
+        if( this.getCodigo() != otro.getCodigo() ){
+            salida = false; }
+        
+        return salida; }
+	
     } // Fin de la clase Producto

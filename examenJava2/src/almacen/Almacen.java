@@ -6,11 +6,12 @@
 package almacen;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Almacen{
 
     //Atributos
-    ArrayList<Articulo> almacen = new ArrayList<Articulo>();
+    private ArrayList<Articulo>  almacen = new ArrayList<Articulo>();
 
     //Metodos
     /**
@@ -19,8 +20,8 @@ public class Almacen{
      * @see retirarArticulo
      */
     public void anadirArticulo( String d, double pC, double pV, int c, String iva ) throws Exception {
-        Articulo p = new Articulo( d, pC, pV, c, iva );
-        almacen.add(p);
+        
+        almacen.add(  new Articulo( d , pC , pV , c , iva )  );
         }
 
     /**
@@ -29,11 +30,12 @@ public class Almacen{
      * @see anadirArticulo
      */
     public void retirarArticulo( int c ) throws Exception {
-
-        if( almacen.get(c).getCodigo() == c )
-            almacen.remove(c);
-        else
+    	//return almacen.remove(new Arcituculo(codigo));
+        if( almacen.get(c).getCodigo() != c ){
             throw new Exception();
+            }
+        
+        almacen.remove(c);
         }
   
     /**
@@ -43,8 +45,11 @@ public class Almacen{
      * @see devolverIndice
      */
     public Articulo devolverArticulo( int c ){
-        if( almacen.get(c).getCodigo() == c )
+    	    	
+        if( almacen.get(c).getCodigo() == c ){
             return almacen.get(c);
+            }
+        
         return null;
         }
 
@@ -56,9 +61,12 @@ public class Almacen{
      * @see devolverArticulo
      */
     public int devolverIndice( int c ){
-        if( almacen.get(c).getCodigo() == c )
-            return c;
-        return -1;
+    	    	
+        try{
+            return almacen.get(c).getCodigo();
+        }catch( IndexOutOfBoundsException o ){
+            return -1;
+            }
         }
 
     /**
@@ -66,9 +74,14 @@ public class Almacen{
      * @return String
      */
     public String toString(){
+    	
         String cadena = "";
-        for( int i = 0 ; i < almacen.size() ; i++ )
-            cadena += almacen.get(i);
+        Iterator<Articulo> i = almacen.iterator();
+        
+        while( i.hasNext() ){
+            cadena += i.next();
+            }
+        
         return cadena;
         }
 

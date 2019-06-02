@@ -9,8 +9,6 @@ public class IvaInvalidoException extends Exception {
 
     private static final long  serialVersionUID = 1L;
 
-    public IvaInvalidoException( String cadena ){
-        super( cadena );
-        }
+    public IvaInvalidoException( String cadena ){ super( cadena ); }
 
     } // Fin de la clase
