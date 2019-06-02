@@ -11,13 +11,17 @@ public class Cuadrado extends Rectangulo implements Comparable<Cuadrado> {
      * Constructor paramétrico
      * @param lado
      */
-    Cuadrado( int lado ){ super( lado , lado ); }
+    Cuadrado( int lado ){
+        super( lado , lado );
+    }
 
     /**
      * función que devuelve el lado del Cuadrado
      * @return int
      */
-    public int getLado(){ return this.getAlto(); }
+    public int getLado(){
+        return this.getAlto();
+    }
 
     /**
      * función que devuelve el lado del Cuadrado
