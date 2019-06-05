@@ -85,7 +85,7 @@ public class Rectangulo{
             	if(  ( i == 0 || j == 0 ) || ( i == this.alto - 1 || j == this.ancho-1 )  ){
                     resultado += "[]";
                 }
-            	else{
+                else{
                     resultado += "  ";
                 }
             }
