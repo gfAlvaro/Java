@@ -22,15 +22,15 @@ public class menuIva{
             tipoIva = Teclado.entero();
 
             switch( tipoIva ){
-			    case 1:
-			        resultado = "general";
-			        break;
-			    case 2:
-			        resultado = "reducido";
-			        break;
-			    case 3:
-    	            resultado = "super reducido";
-    	            break;
+                case 1:
+                    resultado = "general";
+                    break;
+                case 2:
+                    resultado = "reducido";
+                    break;
+                case 3:
+                    resultado = "super reducido";
+                    break;
                 default:
                     System.out.println( "Opción incorrecta." );
             }
