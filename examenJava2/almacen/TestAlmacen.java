@@ -16,7 +16,7 @@ import excepciones.StockNegativoException;
 import excepciones.CantidadNegativaException;
 import utiles.Menu;
 import utiles.Teclado;
-import utiles.menuIva;
+import utiles.MenuIva;
 
 public class TestAlmacen{
 
@@ -58,7 +58,7 @@ public class TestAlmacen{
             System.out.println( "Introduzca el articulo." );
             almacen.anadir( Teclado.leerCadena( "Descripcion: " ), Teclado.leerDoble( "Precio de compra: " ),
             		        Teclado.leerDoble( "Precio de venta: " ), Teclado.leerEntero( "Stock: " ),
-            		        menuIva.menu() );
+            		        MenuIva.menu() );
             System.out.println( "Articulo añadido con éxito." );
         }
         catch( InputMismatchException i ){
@@ -127,7 +127,7 @@ public class TestAlmacen{
             System.out.print( "Nuevo stock: " );
             almacen.devolver( indice.getCodigo() ).setStock( Teclado.leerEntero() );
             
-            iva = menuIva.menu();
+            iva = MenuIva.menu();
             almacen.devolver( indice.getCodigo() ).setIva( iva );
         }
         catch( IvaInvalidoException ie ){
