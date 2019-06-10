@@ -6,17 +6,10 @@
  */
 package almacen;
 
-import java.util.InputMismatchException;
 import java.util.ArrayList;
 
-import excepciones.IvaInvalidoException;
-import excepciones.PrecioCompraNegativoException;
-import excepciones.PrecioVentaNegativoException;
-import excepciones.StockNegativoException;
-import excepciones.CantidadNegativaException;
 import utiles.Menu;
 import utiles.Teclado;
-import utiles.MenuIva;
 
 public class TestAlmacen{
 
@@ -27,10 +20,8 @@ public class TestAlmacen{
         int codigo;
     	
     	System.out.println( "\n======MOSTRAR ARTICULO======" );
-
         try{
-            System.out.print( "Introduzca el codigo del articulo: " );
-            codigo = Teclado.leerEntero();
+            codigo = Teclado.leerEntero( "Introduzca el codigo del articulo: " );
         
             if(  almacen.devolver( codigo ) == null  ){
                 System.out.println( "Articulo no encontrado." );
@@ -39,42 +30,27 @@ public class TestAlmacen{
                 System.out.println(  almacen.devolver( codigo )  );
             }
         }
-        catch( InputMismatchException ei ){
-            System.out.println( "ERROR: entrada de datos no válida." );
-        }
-        catch( ArrayIndexOutOfBoundsException i ){
-            System.out.println( "El articulo no existe." );
-        }
-        catch( IndexOutOfBoundsException e ){
-            System.out.println( "ERROR: no se encontró el articulo." );
+        catch( Exception e ){
+            System.out.println( e );
         }
     }
     
     public static void alta() {
-    	        
-        System.out.println( "\n======DAR DE ALTA ARTICULO======" );
-        
+    	
+        String titulo = "Seleccione el tipo de IVA deseado:";
+        ArrayList<String> iva = new ArrayList<String>();
+        iva.add( "general" );
+        iva.add( "reducido" );
+        iva.add( "super reducido" );
+        Menu menuIva = new Menu( titulo , iva );
+
+    	System.out.println( "\n======DAR DE ALTA ARTICULO======" );
         try{
             System.out.println( "Introduzca el articulo." );
             almacen.anadir( Teclado.leerCadena( "Descripcion: " ), Teclado.leerDoble( "Precio de compra: " ),
             		        Teclado.leerDoble( "Precio de venta: " ), Teclado.leerEntero( "Stock: " ),
-            		        MenuIva.menu() );
+            		        menuIva.gestionar() );
             System.out.println( "Articulo añadido con éxito." );
-        }
-        catch( InputMismatchException i ){
-            System.out.println( i );
-        }
-        catch( PrecioCompraNegativoException b ){
-            System.out.println( b );
-        }
-        catch( PrecioVentaNegativoException c ){
-            System.out.println( c );
-        }
-        catch( StockNegativoException d ){
-            System.out.println( d );
-        }
-        catch( IvaInvalidoException ie ){
-            System.out.println( ie );
         }
         catch( Exception e ){
             System.out.println( e );
@@ -85,59 +61,50 @@ public class TestAlmacen{
    
         System.out.println( "\n======DAR DE BAJA ARTICULO======" );
 
-        try{
-            System.out.print( "Introduzca el codigo del articulo a eliminar: " );
-            
-            if( almacen.retirar( Teclado.leerEntero() )  ) {
+        try{            
+            if( almacen.retirar( Teclado.leerEntero( "Introduzca el codigo del articulo a eliminar: " ) )  ) {
             	System.out.println( "Borrado con éxito." );
             }
             else {
             	System.out.println( "El artículo no existe." );
             }
         }
-        catch( InputMismatchException ei ){
-            System.out.println( "ERROR: Entrada incorrecta." );
+        catch( Exception e ){
+            System.out.println( e );
         }
     }
     
     public static void modificarArticulo() {
     	
     	Articulo indice;
-    	String iva;
+    	ArrayList<String> iva = new ArrayList<String>();
+        iva.add( "general" );
+        iva.add( "reducido" );
+        iva.add( "super reducido" );
+        String titulo = "Seleccione el tipo de IVA deseado: ";
+        Menu menuIva = new Menu( titulo , iva  );
         
         System.out.println( "\n======MODIFICAR EL ARTICULO======" );
-        
         try{
-            System.out.print( "Introduzca el codigo del articulo a modificar: " );
-            indice = almacen.devolver( Teclado.leerEntero() );
+            indice = almacen.devolver( Teclado.leerEntero( "Introduzca el codigo del articulo a modificar: " ) );
             
             System.out.println( "Descripcion: " + almacen.devolver( indice.getCodigo() ).getDescripcion() );
-            System.out.print( "Nueva descripcion: " );
-            almacen.devolver( indice.getCodigo() ).setDescripcion( Teclado.leerCadena() );
+            almacen.devolver( indice.getCodigo() ).setDescripcion( Teclado.leerCadena( "Nueva descripcion: " ) );
             
             System.out.println( "Precio de compra: " + almacen.devolver( indice.getCodigo() ).getPrecioCompra() );
-            System.out.print( "Nuevo precio de compra: ");
-            almacen.devolver( indice.getCodigo() ).setPrecioCompra( Teclado.leerDoble() );
+            almacen.devolver( indice.getCodigo() ).setPrecioCompra( Teclado.leerDoble( "Nuevo precio de compra: " ) );
             
             System.out.println( "Precio de venta: " + almacen.devolver( indice.getCodigo() ).getPrecioVenta() );
-            System.out.print( "Nuevo precio de venta: " );
-            almacen.devolver( indice.getCodigo() ).setPrecioVenta( Teclado.leerDoble() );
+            almacen.devolver( indice.getCodigo() ).setPrecioVenta( Teclado.leerDoble( "Nuevo precio de venta: " ) );
             
             System.out.println( "Stock: " + almacen.devolver( indice.getCodigo() ).getStock() );
-            System.out.print( "Nuevo stock: " );
-            almacen.devolver( indice.getCodigo() ).setStock( Teclado.leerEntero() );
+            almacen.devolver( indice.getCodigo() ).setStock( Teclado.leerEntero( "Nuevo stock: " ) );
             
-            iva = MenuIva.menu();
-            almacen.devolver( indice.getCodigo() ).setIva( iva );
-        }
-        catch( IvaInvalidoException ie ){
-            System.out.println( "ERROR: IVA incorrecto." );				
-        }
-        catch( InputMismatchException ei ){
-            System.out.println( "ERROR: entrada incorrecta." );
+            System.out.println( "Tipo de Iva: " + almacen.devolver( indice.getCodigo() ).getIva() );
+            almacen.devolver( indice.getCodigo() ).setIva( menuIva.gestionar() );
         }
         catch( Exception e ){
-            System.out.println( "ERROR: no se pudo modificar el articulo." );
+            System.out.println( e );
         }
     }
     
@@ -147,16 +114,13 @@ public class TestAlmacen{
     	        
         System.out.println( "\n======ENTRADA DE MERCANCIA======" );
         try{
-            System.out.println( "Introduzca el codigo del articulo" );
-            indice = almacen.devolver( Teclado.leerEntero() );
-            System.out.print( "Introduzca la cantidad que desea sumar al stock: " );
-            almacen.devolver( indice.getCodigo() ).incrementar( Teclado.leerEntero() );
-            System.out.println( "Stock actualizado" );        }
-        catch( InputMismatchException ei ){
-            System.out.println( "ERROR: entrada incorrecta." );					
+            indice = almacen.devolver( Teclado.leerEntero( "Introduzca el codigo del articulo: " ) );
+            almacen.devolver( indice.getCodigo() )
+                    .incrementar( Teclado.leerEntero( "Introduzca la cantidad que desea sumar al stock: " ) );
+            System.out.println( "Stock actualizado" );				
         }
         catch( Exception e ){
-            System.out.println( "ERROR: no se pudo incrementar el stock" );
+            System.out.println( e );
         }
     }
     
@@ -166,32 +130,22 @@ public class TestAlmacen{
 
         System.out.println( "\n======SALIDA DE MERCANCIA======" );
         try{
-            System.out.println( "Introduzca el codigo del articulo" );
-            indice = almacen.devolver( Teclado.leerEntero() );
-            System.out.print( "Introduzca la cantidad que desea restar al stock: " );
-            almacen.devolver(indice.getCodigo() ).reducir( Teclado.leerEntero() );
+            indice = almacen.devolver( Teclado.leerEntero( "Introduzca el codigo del articulo:" ) );
+            almacen.devolver(indice.getCodigo() )
+                    .reducir( Teclado.leerEntero( "Introduzca la cantidad que desea restar al stock: " ) );
             System.out.println( "Stock actualizado" );
-            }
-        catch( InputMismatchException ei ){
-            System.out.println( "ERROR: entrada incorrecta." );
         }
-        catch( IndexOutOfBoundsException e ){
-            System.out.println( "ERROR: articulo no econtrado." );
-        }
-        catch( StockNegativoException a ){
-            System.out.println( "El stock no puede ser negativo." );
-        }
-        catch( CantidadNegativaException o ){
-            System.out.println( "ERROR: articulo no econtrado." );
+        catch( Exception e ){
+            System.out.println( e );
         }
     }
 
     public static void main( String[] args ){
 
-    	int opcion;
-    	String titulo = "======ALMACEN======";
-    	ArrayList<String> opciones = new ArrayList<String>();
-    	opciones.add( "Mostrar almacen" );
+        int opcion;
+        String titulo = "======ALMACEN======";
+        ArrayList<String> opciones = new ArrayList<String>();
+        opciones.add( "Mostrar almacen" );
         opciones.add( "Mostrar articulo" );
         opciones.add( "Alta" );
         opciones.add( "Baja" );

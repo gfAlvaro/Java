@@ -45,7 +45,7 @@ public class Articulo {
      * @param iva
      */
     public Articulo( String descripcion , double precioCompra ,
-    	    double precioVenta , int stock , String iva ) throws CantidadNegativaException,
+    	    double precioVenta , int stock , int iva ) throws CantidadNegativaException,
                                                                 PrecioCompraNegativoException,
                                                                 PrecioVentaNegativoException,
                                                                 StockNegativoException,
@@ -73,16 +73,16 @@ public class Articulo {
      * @param iva
      * @throws IvaInvalidoException
      */
-    public void setIva( String iva ) throws IvaInvalidoException {
+    public void setIva( int iva ) throws IvaInvalidoException {
 
         switch( iva ) {
-        case  "general":
+        case 1:
             this.iva = Iva.GENERAL;
             break;
-        case "reducido":
+        case 2:
             this.iva = Iva.REDUCIDO;
             break;
-        case "super reducido":
+        case 3:
             this.iva = Iva.SUPERREDUCIDO;
             break;
         default:
@@ -163,7 +163,7 @@ public class Articulo {
     public void setPrecioCompra( double precioCompra ) throws PrecioCompraNegativoException {
     	
         if( precioCompra < 0 ){
-            throw new PrecioCompraNegativoException("El precio de compra no puede ser negativo");
+            throw new PrecioCompraNegativoException( "El precio de compra no puede ser negativo" );
         }
         
         this.precioCompra = precioCompra;
@@ -204,10 +204,10 @@ public class Articulo {
      * @see reducirExistencias
      */
     public void incrementar( int cantidad ) throws CantidadNegativaException,
-                                                            StockNegativoException {
+                                                    StockNegativoException {
     	
     	if( cantidad < 0 ){
-            throw new CantidadNegativaException("La cantidad no puede ser negativa");
+            throw new CantidadNegativaException( "La cantidad no puede ser negativa" );
         }
 
         this.setStock( this.getStock() + cantidad );
@@ -219,7 +219,7 @@ public class Articulo {
      * @see incrementarExistencias
      */
     public void reducir( int cantidad ) throws CantidadNegativaException,
-                                                        StockNegativoException { 
+                                                StockNegativoException { 
     	
         if( cantidad < 0 ){
             throw new CantidadNegativaException( "La cantidad no puede ser negativa" );
@@ -233,7 +233,7 @@ public class Articulo {
      * @return String
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "Codigo - " + this.codigo
                 + "\nDescripcion - " + this.descripcion
                 + "\nPrecio de compra - " + this.precioCompra
@@ -243,24 +243,25 @@ public class Articulo {
     }
 	
     @Override
-    public int hashCode() {
-    
-        final int prime = 31;
-        int result = 1;
-        
-        result = prime * result + codigo;
-        
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codigo;
+		return result;
+	}
 
     @Override
-    public boolean equals( Object obj ) {
-    
-        Articulo other = (Articulo) obj;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Articulo other = (Articulo) obj;
+		if (codigo != other.codigo)
+			return false;
+		return true;
+	}
 
-        return ( this.getClass() == obj.getClass() )
-                && ( obj != null )
-                && ( this.codigo == other.codigo );
-    }
-    
 } // Fin de la clase Articulo

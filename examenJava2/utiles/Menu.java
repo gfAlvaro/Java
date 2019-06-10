@@ -5,7 +5,6 @@
  */
 package utiles;
 
-import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ public class Menu{
         
         System.out.println( titulo );
         while( it.hasNext() ){
-        	cadena = it.next();
+            cadena = it.next();
     	    System.out.println( contador + ". " + cadena );
     	    contador++;
         }
@@ -53,11 +52,10 @@ public class Menu{
 
         do{
             try{
-                System.out.println( "Introduzca una opción" );
-                opcion = Teclado.leerEntero();
+                opcion = Teclado.leerEntero( "Introduzca una opción: " );
             }
-            catch( InputMismatchException ie ){
-                System.out.println( "ERROR: entrada incorrecta." );
+            catch( Exception e ){
+                System.out.println( e );
             }
         }while(opcion < 1 || opcion > this.opciones.size() );
         

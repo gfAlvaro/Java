@@ -25,7 +25,7 @@ public class Almacen {
      * @see retirarArticulo
      */
     public void anadir( String descripcion, double precioCompra,
-                        double precioVenta, int cantidad, String iva ) throws CantidadNegativaException,
+                        double precioVenta, int cantidad, int iva ) throws CantidadNegativaException,
                                                                             PrecioCompraNegativoException,
                                                                             PrecioVentaNegativoException,
                                                                             StockNegativoException,
@@ -40,8 +40,7 @@ public class Almacen {
      * @see anadirArticulo
      */
     public boolean retirar( int codigo ) {
-    	
-        return almacen.remove( new Articulo( codigo )  );
+        return almacen.remove(  new Articulo( codigo )  );
     }
   
     /**
@@ -51,8 +50,7 @@ public class Almacen {
      * @see devolverIndice
      */
     public Articulo devolver( int codigo ) throws IndexOutOfBoundsException {
-
-    	return almacen.get(  almacen.indexOf(  new Articulo( codigo ) )  );
+    	return almacen.get(  almacen.indexOf( new Articulo( codigo ) )  );
     }
 
     /**
@@ -60,7 +58,6 @@ public class Almacen {
      * @return String
      */
     public String toString(){
-    	
         return almacen.toString();
     }
 
