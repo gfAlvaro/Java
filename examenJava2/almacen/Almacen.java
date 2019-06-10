@@ -25,11 +25,7 @@ public class Almacen {
      * @see retirarArticulo
      */
     public void anadir( String descripcion, double precioCompra,
-                        double precioVenta, int cantidad, int iva ) throws CantidadNegativaException,
-                                                                            PrecioCompraNegativoException,
-                                                                            PrecioVentaNegativoException,
-                                                                            StockNegativoException,
-                                                                            IvaInvalidoException {
+                        double precioVenta, int cantidad, int iva ) throws Exception {
         
         almacen.add(  new Articulo( descripcion , precioCompra , precioVenta , cantidad , iva )  );
     }

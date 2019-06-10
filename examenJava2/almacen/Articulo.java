@@ -45,11 +45,7 @@ public class Articulo {
      * @param iva
      */
     public Articulo( String descripcion , double precioCompra ,
-    	    double precioVenta , int stock , int iva ) throws CantidadNegativaException,
-                                                                PrecioCompraNegativoException,
-                                                                PrecioVentaNegativoException,
-                                                                StockNegativoException,
-                                                                IvaInvalidoException {
+    	    double precioVenta , int stock , int iva ) throws Exception {
     	
         setDescripcion( descripcion );
         setPrecioCompra( precioCompra );
@@ -203,8 +199,7 @@ public class Articulo {
      * @param cantidad Cantidad que se suma al stock
      * @see reducirExistencias
      */
-    public void incrementar( int cantidad ) throws CantidadNegativaException,
-                                                    StockNegativoException {
+    public void incrementar( int cantidad ) throws Exception {
     	
     	if( cantidad < 0 ){
             throw new CantidadNegativaException( "La cantidad no puede ser negativa" );
@@ -218,8 +213,7 @@ public class Articulo {
      * @param cantidad Cantidad que se resta al stock
      * @see incrementarExistencias
      */
-    public void reducir( int cantidad ) throws CantidadNegativaException,
-                                                StockNegativoException { 
+    public void reducir( int cantidad ) throws Exception { 
     	
         if( cantidad < 0 ){
             throw new CantidadNegativaException( "La cantidad no puede ser negativa" );
