@@ -1,35 +1,36 @@
 /**
  * sustituirInterfaz.java 
  * Programa que cambia los caracteres de un fichero y los almacena en otro
- * Componentes gráficos:
- *  Etiquetas.
- *  Fichero origen y destino.
- *  Botón para ejecutar la acción.
- *  Caja de texto con el contenido del fichero destino no editable.
  * @author Alvaro Garcia Fuentes
  */
-package exMayo2019AlvaroGarciaFuentes;;
+package exMayo2019AlvaroGarciaFuentes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextArea; // Para cajas de texto con saltos de linea
+import javax.swing.JTextArea;
 
 public class sustituirInterfaz extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
+    private String archivoEntrada;    
+    private String archivoSalida;    
+
     private JLabel texto;
-    private JLabel textoResultado;
+    private JLabel textoEntrada;
+    private JLabel textoSalida;
     private JTextField caja;
-    private JTextArea cajaResultado;
+    private JTextArea cajaEntrada;
+    private JTextArea cajaSalida;
     private JButton boton;
+    private JFileChooser fc1;
+    private JFileChooser fc2;
 
     /**
      * Constructor
@@ -44,7 +45,7 @@ public class sustituirInterfaz extends JFrame implements ActionListener {
      * configurar las medidas de la ventana
      */
     private void configurarVentana(){
-        this.setSize( 400 , 600 );
+        this.setSize( 800 , 600 );
         this.setLocationRelativeTo( null );
         this.setLayout( null );
         this.setResizable( false );
@@ -60,28 +61,55 @@ public class sustituirInterfaz extends JFrame implements ActionListener {
         texto = new JLabel();
         caja = new JTextField();
         boton = new JButton();
-        textoResultado = new JLabel();
-        cajaResultado = new JTextArea();
-
+        textoEntrada = new JLabel();
+        textoSalida = new JLabel();
+        cajaEntrada = new JTextArea();
+        cajaSalida = new JTextArea();
+        fc1 = new JFileChooser();
+        int seleccionado;
+        String cadenaEntrada = "";
+        ArrayList<String> datosEntrada;
+        
         // configuramos los componentes
-        texto.setText( "Nombre archivo:" );
-        texto.setBounds( 25 , 25 , 150 , 25 );
-        caja.setBounds( 200 , 25 , 150 , 25 ); // ( x , y , ancho , alto )
+        texto.setText( "Sustitucion de caracteres de un archivo." );
+        texto.setBounds( 260 , 25 , 400 , 25 );
 
-        boton.setText( "Sustituir" ); // texto del boton
-        boton.setBounds( 100 , 100 , 200 , 30 ); // ( x , y , ancho , alto )
-        boton.addActionListener( this ); // accion para el boton, que estara en esta clase
+        boton.setText( "Sustituir" );
+        boton.setBounds( 325 , 100 , 150 , 30 );
+        boton.addActionListener( this );
 
-        textoResultado.setText( "Resultado: " );
-        textoResultado.setBounds( 25 , 150 , 100 , 25 );
-        cajaResultado.setBounds( 25 , 175 , 350 , 350 );
+        textoEntrada.setText( "Archivo original: " );
+        textoEntrada.setBounds( 25 , 150 , 150 , 25 );
+        cajaEntrada.setBounds( 25 , 175 , 350 , 350 );
 
-        // anyadimos los componentes a la ventana
+        seleccionado = fc1.showOpenDialog( this.getContentPane() );
+        if( seleccionado == JFileChooser.APPROVE_OPTION ) {
+            archivoEntrada = fc1.getSelectedFile().getAbsolutePath();
+        }
+        
+        try {
+            datosEntrada = Ocurrencias.leerArchivo( archivoEntrada );
+
+            for( String i : datosEntrada ){
+                cadenaEntrada += i + "\n";
+            }
+        }catch( Exception e ) {
+            cadenaEntrada = e.toString();
+        }
+        cajaEntrada.setText( cadenaEntrada );
+        
+        textoSalida.setText( "Archivo modificado: " );
+        textoSalida.setBounds( 425 , 150 , 150 , 25 );
+        cajaSalida.setBounds( 425 , 175 , 350 , 350 );
+
+        // añadimos componentes a la ventana
         this.add( texto );
         this.add( caja );
         this.add( boton );
-        this.add( textoResultado );
-        this.add( cajaResultado );
+        this.add( textoEntrada );
+        this.add( cajaEntrada );
+        this.add( textoSalida );
+        this.add( cajaSalida );
     }
 
     /**
@@ -91,32 +119,38 @@ public class sustituirInterfaz extends JFrame implements ActionListener {
     @Override
     public void actionPerformed( ActionEvent e ){
 
-        String archivo1 = caja.getText();
-        String archivoSalida = Ocurrencias.sustituir( archivo1 );	
-        String linea;
+    	fc2 = new JFileChooser();
         String resultado = "";
-        File f;
-        FileReader fr;
-        BufferedReader br;
-
-        try{
-            // Abrir, leer y cerrar el archivo
-            f = new File( archivoSalida );
-            fr = new FileReader( f );
-            br = new BufferedReader( fr );
-
-            while(  ( linea = br.readLine() ) != null  ) {
-                resultado = resultado + linea + '\n';
+        ArrayList<String> datos;
+        ArrayList<String> datosSalida;
+        int seleccionado;
+        
+        // ventana para elegir archivo de salida
+        seleccionado = fc2.showOpenDialog( this.getContentPane() );
+        if( seleccionado == JFileChooser.APPROVE_OPTION ) {
+            archivoSalida = fc2.getSelectedFile().getAbsolutePath();
+        }
+        
+        // leer archivo de entrada, sustituir caracteres y escribir en archivo de salida
+        try {
+            datos = Ocurrencias.leerArchivo( archivoEntrada );
+            datos = Ocurrencias.sustituir( datos );
+            Ocurrencias.escribirArchivo( archivoSalida , datos );
+            
+            datosSalida = Ocurrencias.leerArchivo( archivoSalida );
+            
+            for( String i : datosSalida ) {
+                resultado += i + "\n";
             }
-            fr.close();
-
+            
         }catch( Exception g ){
-            cajaResultado.setText( "ERROR" );
+            resultado = g.toString();
         }
 
-        cajaResultado.setText( resultado );
+        // mostrar achivo de salida
+        cajaSalida.setText( resultado );
         }
-
+	
     public static void main( String[] args ) {
         sustituirInterfaz miVentana = new sustituirInterfaz();
         miVentana.setVisible( true );
