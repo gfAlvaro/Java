@@ -1,15 +1,12 @@
 /**
- * unionFicherosInterfaz.java 
- * Programa que guarda en un fichero el contenido de otros dos ficheros,
- * de tal forma que en el fichero resultante aparezcan las líneas
- *  de los primeros dos ficheros mezcladas, es decir, la primera línea
- *  será del primer fichero, la segunda será del segundo fichero,
- *  la tercera será la siguiente del primer fichero, etc.
- * Componentes gráficos:
- *  Etiquetas.
- *  Fichero origen y destino.
- *  Botón para ejecutar la acción.
- *  Caja de texto con el contenido del fichero destino no editable.
+ * FechaInterfaz.java 
+ * Programa que pide una fecha y permite hacer distintas operaciones con ella:
+ *  Validar fecha
+ *  Sumar 1 día
+ *  Restar 1 día
+ *  Mostrar el número de días entre la fecha dada y la fecha actual
+ *  Terminar el programa
+ *  
  * @author Alvaro Garcia Fuentes
  */
 package exMayo2019AlvaroGarciaFuentes;
@@ -23,16 +20,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextArea; // Para cajas de texto con saltos de linea
+import javax.swing.JOptionPane;
 
 public class FechaInterfaz extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
     private JLabel texto;
-    private JLabel textoResultado;
     private JTextField caja;
-    private JTextArea cajaResultado;
     private JButton validarFecha;
     private JButton diaAnterior;
     private JButton diaPosterior;
@@ -43,7 +38,7 @@ public class FechaInterfaz extends JFrame implements ActionListener {
      * Constructor
      */
     FechaInterfaz() {
-        super( "Sustituir ocurrencias" );
+        super( "Fechas" );
         configurarVentana();
         inicializarComponentes();
     }
@@ -52,7 +47,7 @@ public class FechaInterfaz extends JFrame implements ActionListener {
      * configurar las medidas de la ventana
      */
     private void configurarVentana(){
-        this.setSize( 400 , 500 );
+        this.setSize( 400 , 400 );
         this.setLocationRelativeTo( null );
         this.setLayout( null );
         this.setResizable( false );
@@ -60,7 +55,7 @@ public class FechaInterfaz extends JFrame implements ActionListener {
     }
 
     /**
-     * Inicializa los componentes de la ventana
+     * Inicializar los componentes de la ventana
      */
     private void inicializarComponentes() {
 
@@ -72,8 +67,6 @@ public class FechaInterfaz extends JFrame implements ActionListener {
         diaPosterior = new JButton();
         diasHastaHoy = new JButton();
         salir = new JButton();
-        textoResultado = new JLabel();
-        cajaResultado = new JTextArea();
 
         // configuramos los componentes
         texto.setText( "Introduzca fecha:" );
@@ -99,10 +92,6 @@ public class FechaInterfaz extends JFrame implements ActionListener {
         salir.setText( "Salir" );
         salir.setBounds( 100 , 300 , 200 , 30 );
         salir.addActionListener( this );
-        
-        textoResultado.setText( "Resultado: " );
-        textoResultado.setBounds( 100 , 350 , 100 , 25 );
-        cajaResultado.setBounds( 25 , 400 , 350 , 25 );
 
         // anyadimos los componentes a la ventana
         this.add( texto );
@@ -112,28 +101,34 @@ public class FechaInterfaz extends JFrame implements ActionListener {
         this.add( diaPosterior );
         this.add( diasHastaHoy );
         this.add( salir );
-        this.add( textoResultado );
-        this.add( cajaResultado );
     }
 
     /**
-     * establece la acción que se lleva a cabo
+     * selecciona la acción que se lleva a cabo
      * al pulsar el botón
      */
     @Override
     public void actionPerformed( ActionEvent e ){
-
+    	
         String fecha = caja.getText();
         String resultado = "";
         Object opcion = e.getSource();
+        boolean activarPanel = false;
+ 
+        
+        if( opcion == salir ) {
+            System.exit(0);
+        }
         
         if( ! Fechas.esValida( fecha ) ) {
     	    resultado = "La fecha no es valida";
+    	    activarPanel = true;
     	    }
         
         else {
             if( opcion == validarFecha ) {
         	    resultado = "La fecha es valida";
+        	    activarPanel = true;
             }
         
             else if ( opcion == diaAnterior  ) {
@@ -145,22 +140,26 @@ public class FechaInterfaz extends JFrame implements ActionListener {
             }
         
             else if( opcion == diasHastaHoy  ) {
-            	
                 Calendar c = new GregorianCalendar();
                 String fechaHoy = Fechas.fecha(  c.get( Calendar.DATE ),
-                		                         c.get( Calendar.MONTH ),
+                		                         c.get( Calendar.MONTH  ) + 1,
                 		                         c.get( Calendar.YEAR )  );
-                
-                resultado = Integer.toString(  Fechas.comparar( fecha , fechaHoy )  );
+                try {
+                resultado = "Numero de días: " + Integer.toString(  Fechas.numeroDias( fecha , fechaHoy )  );
                 c = null;
-            }
-        
-            else if( opcion == salir ) {
-        	    System.exit(0);
+            	} catch ( Exception pe ) {
+            		resultado = "ERROR al calcular numero dias";
+                }
+            	activarPanel = true;
             }
         }
         
-      	cajaResultado.setText( resultado );
+        if( activarPanel ) {
+            JOptionPane.showMessageDialog(null, resultado );
+        }
+        else {
+      	    caja.setText( resultado );
+      	}
     }
 
     public static void main( String[] args ) {

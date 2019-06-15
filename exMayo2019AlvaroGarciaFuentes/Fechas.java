@@ -1,39 +1,29 @@
 /**
  * Fechas.java
- * Clase con los siguientes métodos:
+ * Clase para manejar fechas con los siguientes métodos:
  * 
- * Introducir por teclado una fecha en formato dd/mm/aaaa.
- *      Pide una fecha al usuario, si no se introduce correctamente devuelve un mensaje de error. 
- *      Usa una función booleana para validar la fecha.
+ * Validar una fecha.
  * 
- * Sumar días a la fecha.
- *      Pide un número de días positivo para sumar a la fecha introducida y actualiza su valor. 
- *      Esta opción sólo podrá realizarse si hay una fecha introducida, si no la hay mostrará un mensaje de error, 
- *      si el número de días introducido no es positivo también. 
- *      Usa una función que recibirá la fecha, el número de días a sumarle y devolverá la nueva fecha.
- *      
- * Restar días a la fecha.
- *      Pide un número de días (negativo) para sumar a la fecha introducida previamente y actualiza su valor. 
- *      Esta opción sólo podrá realizarse si hay una fecha introducida, si no la hay mostrará un mensaje de error, 
- *      si el número de días introducido no es negativo también. Usa la función del apartado anterior.
- *
- * Comparar la fecha introducida con otra.
- *      Pide una fecha al usuario (válida, si no lo es da error) y la comparará con la que tenemos almacenada, 
- *      posteriormente mostrará si esta fecha es anterior, igual o posterior a la que tenemos almacenada, 
- *      usará una función para ello a la que le pasaremos las dos fechas y devolverá un valor negativo si la 1ª es ANTERIOR a la 2ª, 
- *      0 si son IGUALES y un valor positivo si es POSTERIOR.
- *      La cantidad devuelta es el número de días entre las dos fechas.
- *
- * Mostrar fecha.
+ * Sumar 1 día a la fecha.
+ *    
+ * Restar 1 día a la fecha.
+ * 
+ * Calcuar numero de días entre dos fechas.
+ * 
+ * Mostrar fecha con formato a partir de tres enteros
  * 
  * @author Alvaro Garcia Fuentes
  */
 package exMayo2019AlvaroGarciaFuentes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Fechas {
 
 	// sin bisiestos
-    final static int [] DIAS_MES = { 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 };
+    private final static int [] DIAS_MES = { 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 };
 
     /**
      * Comprueba si una fecha es válida.
@@ -77,71 +67,20 @@ public class Fechas {
     }
 
     /**
-     * Compara dos fechas
-     * la cantidad devuelta es el numero de días entre las dos fechas
+     * Calcula el numero de dias entre dos fechas
      * @param fecha1
      * @param fecha2
-     * @return valor positivo si la primera es posterior a la segunda, negativo si es anterior y 0 si son iguales
+     * @return numero de días entre las dos fechas.
+     * @throws ParseException
      */
-    public static int comparar( String fecha1 , String fecha2 ) {
-    	
-        int dia1 = Integer.parseInt(  fecha1.substring( 0 , 2 )  );
-        int dia2 = Integer.parseInt(  fecha2.substring( 0 , 2 )  );
-        int mes1 = Integer.parseInt(  fecha1.substring( 3 , 5 )  );
-        int mes2 = Integer.parseInt(  fecha2.substring( 3 , 5 )  );
-        int anyo1 = Integer.parseInt(  fecha1.substring( 6 )  );
-        int anyo2 = Integer.parseInt(  fecha2.substring( 6 )  );
-        int resultado = 0;
+    public static int numeroDias( String fecha1 , String fecha2 ) throws ParseException {
         
-        if( anyo1 != anyo2 ) {
-            resultado += 365 * ( anyo1 - anyo2 );
-        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         
-        else if( mes1 != mes2 ) {
+        Date fechaInicial = dateFormat.parse( fecha1 );
+        Date fechaFinal = dateFormat.parse( fecha2 );
 
-            int mes1aux = 0;
-            int mes2aux = 0;
-               	
-        	for( int i = 0 ; i < mes1 ; i++ ) {
-        	    mes1aux += DIAS_MES[ i ];
-            }
-            for( int j = 0 ; j < mes2 ; j++ ) {
-        	    mes2aux += DIAS_MES[ j ];
-            }
-
-        resultado += mes1aux - mes2aux ;
-        }
-        
-        else if( dia1 != dia2 ) {
-        	resultado += dia1 - dia2;
-        }
-        
-        return resultado;
-    }
-  
-    /**
-     * Suma a la fecha los días indicados y devuelve la nueva fecha.
-     * @param fecha
-     * @param n   puede ser positivo o negativo
-     * @return una nueva fecha
-     */
-    public static String sumaDias( String fecha , int n ) {
-
-        String fechaSalida = fecha;
-        
-        if( n >= 0 ) {
-            for( int i = 1 ; i <= n ; i++ ) {
-                fechaSalida = suma1Dia( fechaSalida );
-            }
-        }
-        else {
-            int ndias = Math.abs( n );
-            for ( int i = 1 ; i <= ndias ; i++ ) {
-                fechaSalida = resta1Dia( fechaSalida );
-            }
-        }
-        
-        return fechaSalida;
+        return (int) (  ( fechaFinal.getTime() - fechaInicial.getTime() ) / 86400000  );		
     }
 
     /**
@@ -150,28 +89,28 @@ public class Fechas {
      * @return fecha del día siguiente
      */
     public static String suma1Dia( String fecha ) {
-        int d = Integer.parseInt(  fecha.substring( 0 , 2 )  );
-        int m = Integer.parseInt(  fecha.substring( 3 , 5 )  );
-        int a = Integer.parseInt(  fecha.substring( 6 )  );
-    
-        int diasmes = DIAS_MES[ m - 1 ];
+    	
+        int dia = Integer.parseInt(  fecha.substring( 0 , 2 )  );
+        int mes = Integer.parseInt(  fecha.substring( 3 , 5 )  );
+        int anyo = Integer.parseInt(  fecha.substring( 6 )  );
+        int diasMes = DIAS_MES[ mes - 1 ];
         
         // febrero bisisesto
-        if (  m == 2 && a%4 == 0 && ( a%100 != 0 || a%400 == 0 )  ) {
-            diasmes++;
+        if (  mes == 2 && anyo%4 == 0 && ( anyo%100 != 0 || anyo%400 == 0 )  ) {
+            diasMes++;
         }
         
-        d++;
-        if ( d > diasmes ) {
-            d = 1;
-            m++;
-            if ( m == 13 ) {
-                m = 1;
-                a++;
+        dia++;
+        if ( dia > diasMes ) {
+            dia = 1;
+            mes++;
+            if ( mes == 13 ) {
+                mes = 1;
+                anyo++;
             }
         }
         
-        return fecha( d , m , a );
+        return fecha( dia , mes , anyo );
     }
 
     /**
@@ -198,7 +137,7 @@ public class Fechas {
                 d++;
             }
         }
-    
+        
     return fecha( d , m , a );
     }
 
@@ -215,15 +154,15 @@ public class Fechas {
         String mes = Integer.toString( m ).trim();
         String anyo = Integer.toString( a ).trim();
 
-        if ( dia.length() < 2 ) {
+        if( dia.length() < 2 ) {
             dia = "0" + dia;
         }
 
-        if ( mes.length() < 2 ) {
+        if( mes.length() < 2 ) {
             mes = "0" + mes;
         }
 
-        for ( int i = anyo.length() ; i < 4 ; i++ ) {
+        for( int i = anyo.length() ; i < 4 ; i++ ) {
             anyo = "0" + anyo;
         }
 
