@@ -28,7 +28,7 @@ public class Fechas {
     /**
      * Comprueba si una fecha es válida.
      * @param fecha
-     * @return <code>true</code> si es váida y <code>false</code> en caso contrario
+     * @return <code>true</code> si es válida y <code>false</code> en caso contrario
      */
     public static boolean esValida( String fecha ) {
     	
@@ -36,7 +36,7 @@ public class Fechas {
     	
         // comprobar que es un formato dd/mm/aaaa
         if( fecha.length() != 10 || !Character.isDigit( fecha.charAt(0) ) || !Character.isDigit( fecha.charAt(1) )
-        		                 || !Character.isDigit( fecha.charAt(3) ) || !Character.isDigit( fecha.charAt(4) )
+        	                     || !Character.isDigit( fecha.charAt(3) ) || !Character.isDigit( fecha.charAt(4) )
                                  || !Character.isDigit( fecha.charAt(6) ) || !Character.isDigit( fecha.charAt(7) )
                                  || !Character.isDigit( fecha.charAt(8) ) || !Character.isDigit( fecha.charAt(9) )
                                  || fecha.charAt(2) != '/' || fecha.charAt(5) != '/' ) {
@@ -120,25 +120,25 @@ public class Fechas {
      */
     public static String resta1Dia( String fecha ) {
     	
-        int d = Integer.parseInt(  fecha.substring( 0 , 2 )  );
-        int m = Integer.parseInt(  fecha.substring( 3 , 5 )  );
-        int a = Integer.parseInt(  fecha.substring( 6 )  );
+        int dia = Integer.parseInt(  fecha.substring( 0 , 2 )  );
+        int mes = Integer.parseInt(  fecha.substring( 3 , 5 )  );
+        int anyo = Integer.parseInt(  fecha.substring( 6 )  );
     
-        d--;
-        if ( d == 0 ) { // mes anterior
-            m--;
-            if ( m == 0 ) { // año anterior
-                m = 12;
-                a--;
+        dia--;
+        if ( dia == 0 ) { // mes anterior
+            mes--;
+            if ( mes == 0 ) { // año anterior
+                mes = 12;
+                anyo--;
             } 
-            d = DIAS_MES[ m - 1 ];
-            // ¿febrero y año bisisesto?
-            if (  m == 2 && a%4 == 0 && ( a%100 != 0 || a%400 == 0 )  ) {
-                d++;
+            dia = DIAS_MES[ mes - 1 ];
+            // febrero bisisesto
+            if (  mes == 2 && anyo % 4 == 0 && ( anyo % 100 != 0 || anyo % 400 == 0 )  ) {
+                dia++;
             }
         }
         
-    return fecha( d , m , a );
+    return fecha( dia , mes , anyo );
     }
 
     /**
