@@ -9,66 +9,74 @@ import java.util.ArrayList;
 
 public class Ficheros{
 		
-	
+	/**
+	 * metodo para leer un archivo
+	 * @param nombre
+	 * @return
+	 * @throws Exception
+	 */
 	public static ArrayList<String> leer( String nombre ) throws Exception {
 		
-        File archivo1;
-        FileReader fr1;
-        BufferedReader br1;
         ArrayList<String> salida = new ArrayList<String>();
         String linea;
 
-        archivo1 = new File ( nombre );
-        fr1 = new FileReader ( archivo1 );
-        br1 = new BufferedReader( fr1 );
+        File archivo = new File ( nombre );
+        FileReader fr = new FileReader ( archivo );
+        BufferedReader br = new BufferedReader( fr );
             
-        while(  ( linea = br1.readLine() ) != null  ) {
+        while(  ( linea = br.readLine() ) != null  ) {
         	salida.add( linea );
         }
         
-        fr1.close();
+        fr.close();
 
 		return salida;
 	}
 	
+	/**
+	 * metodo para escribir en un archivo
+	 * @param nombre
+	 * @param lineas
+	 * @throws Exception
+	 */
     public static void escribir( String nombre, ArrayList<String> lineas ) throws Exception {
-    
-        FileWriter fichero;
-        PrintWriter pw; 
-    
-        fichero = new FileWriter( nombre );
-        pw = new PrintWriter( fichero );
+        
+        FileWriter archivo = new FileWriter( nombre );
+        PrintWriter pw = new PrintWriter( archivo );
         
         while( ! lineas.isEmpty() ) {
             pw.println( lineas.get(0) );
             lineas.remove(0);
         }
         
-        fichero.close();
+        archivo.close();
     }
 
+    /**
+     * funcion que elimina comentarios de codigo
+     * @param entrada
+     * @return
+     */
     public static ArrayList<String> eliminarComentarios( ArrayList<String> entrada ){
     	
         ArrayList<String> salida = new ArrayList<String>();
+    	boolean leer = true;
     	
         for( String i : entrada ) {
-        	
-        	boolean leer = true;
-        	
-        	if( leer && i.matches("*/**") ) {
-                salida.add( i.substring( 0 , i.indexOf( "/*" ) )  );
-        		leer=false;
-        	}
-        	else if( !leer && i.matches("**/*")) {
-        		leer=true;
-                salida.add( i.substring( i.indexOf("*/") , i.length() - 1 )  );
-        	}
-        	else
-            if( leer && i.matches("*//*") ) {
-                salida.add( i.substring( 0 , i.indexOf( "//" ) )  );
+                	
+        	if(  leer && i.contains( "/*" )  ) {
+        		leer = false;
             }
+        	
+        	if(  leer && !i.contains( "//" )  ) {
+                salida.add(  i  );
+            }       	
+        	
+        	if(  !leer && i.contains( "*/" )  ) {
+        		leer = true;
+        	}
         }
-    	
+        
         return salida;
     }
 } // fin de la clase Ficheros
