@@ -1,5 +1,6 @@
 /**
- * 
+ * FicherosInterfaz.java
+ * Interfaz para manejar ficheros
  * @author Alvaro Garcia Fuentes
  */
 package exJunio2019AlvaroGarciaFuentes;
@@ -29,6 +30,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private JTextArea cajaEntrada;
     private JTextArea cajaSalida;
     private JButton boton;
+    private JButton terminar;
 
     private JFileChooser fc1;
     private JFileChooser fc2;
@@ -47,7 +49,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
      * configurar las medidas de la ventana
      */
     private void configurarVentana(){
-        this.setSize( 800 , 600 );
+        this.setSize( 800 , 650 );
         this.setLocationRelativeTo( null );
         this.setLayout( null );
         this.setResizable( false );
@@ -64,6 +66,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         textoEntrada = new JLabel();
         textoSalida = new JLabel();
         boton = new JButton();
+        terminar = new JButton();
         cajaEntrada = new JTextArea();
         cajaSalida = new JTextArea();
         fc1 = new JFileChooser();
@@ -74,11 +77,11 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         
         // configuramos los componentes
         texto.setText( "Limpiar los comentarios de un archivo fuente" );
-        texto.setBounds( 240 , 25 , 350 , 25 );
+        texto.setBounds( 240 , 25 , 375 , 25 );
 
-        boton.setText( "Limpiar Comentarios" ); // texto del boton
+        boton.setText( "Limpiar Comentarios" );
         boton.setBounds( 300 , 75 , 200 , 30 ); // ( x , y , ancho , alto )
-        boton.addActionListener( this ); // accion para el boton, que estara en esta clase
+        boton.addActionListener( this );
 
         textoEntrada.setText( "Archivo original:" );
         textoEntrada.setBounds( 25 , 125 , 200 , 25 );        
@@ -105,6 +108,10 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         textoSalida.setBounds( 425 , 125 , 200 , 25 );
         cajaSalida.setBounds( 425 , 150, 350 , 400 );
         
+        terminar.setText( "Salir" );
+        terminar.setBounds( 300 , 575 , 200 , 30 ); // ( x , y , ancho , alto )
+        terminar.addActionListener( this );
+        
         // anyadimos los componentes a la ventana
         this.add( texto );
         this.add( textoEntrada );
@@ -112,6 +119,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         this.add( boton );
         this.add( cajaEntrada );
         this.add( cajaSalida );
+        this.add( terminar );
     }
 
     /**
@@ -125,6 +133,10 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     	ArrayList<String> datos;
     	ArrayList<String> datosSalida;
         int seleccionado2;
+        
+        if( e.getSource() == terminar ) {
+            System.exit(0);
+        }
         
         if( numeroParametros < 2 ) {
             seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
@@ -150,7 +162,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
     public static void main( String[] args ) {
 
-        String autor;
+        String autor = "";
     
         if(  ( numeroParametros = args.length ) >= 2  ) {
             nombreEntrada = args[0];
@@ -164,7 +176,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         try {
             autor = Ficheros.leer( "autor.txt" ).get(0);
         }catch( Exception i ) {
-            autor = "autor no encontrado";
+            System.exit(0);
         }
 
         FicherosInterfaz miVentana = new FicherosInterfaz( autor );
