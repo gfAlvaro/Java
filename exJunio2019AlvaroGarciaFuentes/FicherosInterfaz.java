@@ -30,7 +30,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private JTextArea cajaSalida;
     private JButton boton;
 
-	private JFileChooser fc1;
+    private JFileChooser fc1;
     private JFileChooser fc2;
 
     /**
@@ -134,8 +134,8 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         }
     	
     	try {
-    		datos = Ficheros.leer( nombreEntrada ) ;
-    		Ficheros.escribir( nombreSalida,  Ficheros.eliminarComentarios( datos ) );
+            datos = Ficheros.leer( nombreEntrada ) ;
+            Ficheros.escribir( nombreSalida,  Ficheros.eliminarComentarios( datos ) );
             datosSalida = Ficheros.leer( nombreSalida );
             
             for( String i : datosSalida ) {
