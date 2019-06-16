@@ -231,9 +231,9 @@ public class Articulo {
         return "Codigo - " + this.codigo
                 + "\nDescripcion - " + this.descripcion
                 + "\nPrecio de compra - " + this.precioCompra
-		        + "\nPrecio de venta - " + this.precioVenta
-		        + "\nStock - " + this.stock
-		        + "\nTipo de IVA - " + this.iva + "\n\n";
+                + "\nPrecio de venta - " + this.precioVenta
+                + "\nStock - " + this.stock
+                + "\nTipo de IVA - " + this.iva + "\n\n";
     }
 	
     @Override
