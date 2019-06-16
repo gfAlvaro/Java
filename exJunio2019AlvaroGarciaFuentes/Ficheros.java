@@ -60,21 +60,21 @@ public class Ficheros{
     public static ArrayList<String> eliminarComentarios( ArrayList<String> entrada ){
     	
         ArrayList<String> salida = new ArrayList<String>();
-    	boolean leer = true;
+        boolean leer = true;
     	
         for( String i : entrada ) {
                 	
-        	if(  leer && i.contains( "/*" )  ) {
-        		leer = false;
+            if(  leer && i.contains( "/*" )  ) {
+                leer = false;
             }
         	
-        	if(  leer && !i.contains( "//" )  ) {
+            if(  leer && !i.contains( "//" )  ) {
                 salida.add(  i  );
             }       	
         	
-        	if(  !leer && i.contains( "*/" )  ) {
-        		leer = true;
-        	}
+            if(  !leer && i.contains( "*/" )  ) {
+                leer = true;
+            }
         }
         
         return salida;
