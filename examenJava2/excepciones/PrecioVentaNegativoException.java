@@ -12,6 +12,6 @@ public class PrecioVentaNegativoException extends Exception {
     public PrecioVentaNegativoException( String mensaje ){
     	
         super( mensaje );
-        }
+    }
 
 } // Fin de la excepcion

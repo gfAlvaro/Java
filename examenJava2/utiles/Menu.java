@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Menu{
 	
-	// Atributos
+    // Atributos
     private ArrayList<String>  opciones;
     private String  titulo;
     
@@ -37,8 +37,8 @@ public class Menu{
         System.out.println( titulo );
         while( it.hasNext() ){
             cadena = it.next();
-    	    System.out.println( contador + ". " + cadena );
-    	    contador++;
+            System.out.println( contador + ". " + cadena );
+            contador++;
         }
     }
     
@@ -70,5 +70,5 @@ public class Menu{
         mostrar();
         return pedirOpcion();
     }
-	
+
 } // Fin de la clase Menu

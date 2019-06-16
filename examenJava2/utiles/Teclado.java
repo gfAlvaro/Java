@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Teclado{
 	
-	static private Scanner  teclado = new Scanner( System.in );
+    static private Scanner  teclado = new Scanner( System.in );
 
     /**
      * Método para leer un double por teclado
@@ -48,7 +48,7 @@ public class Teclado{
      * @see leerDoble()
      */
     public static double leerDoble( String mensaje ) throws InputMismatchException {
-    	System.out.print( mensaje );
+        System.out.print( mensaje );
         return leerDoble();
     }
 
@@ -59,7 +59,7 @@ public class Teclado{
      * @see leerEntero()
      */
     public static int leerEntero( String mensaje ) throws InputMismatchException {
-    	System.out.print( mensaje );
+        System.out.print( mensaje );
         return leerEntero();
     }
 
@@ -70,7 +70,7 @@ public class Teclado{
      * @see leerCadena()
      */
     public static String leerCadena( String mensaje ) throws InputMismatchException {
-    	System.out.print( mensaje );
+        System.out.print( mensaje );
         return leerCadena();
     }
     

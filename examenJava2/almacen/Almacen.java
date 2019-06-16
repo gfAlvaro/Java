@@ -7,12 +7,6 @@ package almacen;
 
 import java.util.ArrayList;
 
-import excepciones.CantidadNegativaException;
-import excepciones.IvaInvalidoException;
-import excepciones.PrecioCompraNegativoException;
-import excepciones.PrecioVentaNegativoException;
-import excepciones.StockNegativoException;
-
 public class Almacen {
 
     //Atributos
