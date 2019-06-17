@@ -7,12 +7,16 @@ package exJunio2019AlvaroGarciaFuentes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea; // Para cajas de texto con saltos de linea
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class FicherosInterfaz extends JFrame implements ActionListener {
 
@@ -29,12 +33,19 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
     private JTextArea cajaEntrada;
     private JTextArea cajaSalida;
+    private JScrollPane scrollableTextArea1;
+    private JScrollPane scrollableTextArea2;
     private JButton boton;
     private JButton terminar;
 
     private JFileChooser fc1;
     private JFileChooser fc2;
+    private JTextField txtEntrada;
+    private JTextField txtSalida;
 
+    private JButton botonEntrada;
+    private JButton botonSalida;
+    
     /**
      * Constructor
      */
@@ -51,7 +62,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private void configurarVentana(){
         this.setSize( 800 , 650 );
         this.setLocationRelativeTo( null );
-        this.setLayout( null );
+        getContentPane().setLayout( null );
         this.setResizable( false );
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
@@ -62,64 +73,59 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private void inicializarComponentes() {
 
         // creamos los componentes
-        texto = new JLabel();
-        textoEntrada = new JLabel();
-        textoSalida = new JLabel();
-        boton = new JButton();
-        terminar = new JButton();
+        texto = new JLabel( "Limpiar los comentarios de un archivo fuente" );
+        textoEntrada = new JLabel( "Archivo original: " );
+        textoSalida = new JLabel( "Archivo modificado: " );
+        boton = new JButton( "Limpiar Comentarios" );
+        terminar = new JButton( "Salir" );
         cajaEntrada = new JTextArea();
         cajaSalida = new JTextArea();
-        fc1 = new JFileChooser();
-        fc2 = new JFileChooser();
-        ArrayList<String> datosEntrada;
-        String cadenaEntrada = "";
-        int seleccionado;
+        botonEntrada = new JButton( "Fichero de entrada" );
+        botonSalida = new JButton( "Fichero de salida" );
+        scrollableTextArea1 = new JScrollPane( cajaEntrada );  
+        scrollableTextArea2 = new JScrollPane( cajaSalida ); 
         
         // configuramos los componentes
-        texto.setText( "Limpiar los comentarios de un archivo fuente" );
-        texto.setBounds( 240 , 25 , 375 , 25 );
+        texto.setBounds( 239 , 12 , 375 , 25 );
 
-        boton.setText( "Limpiar Comentarios" );
-        boton.setBounds( 300 , 75 , 200 , 30 ); // ( x , y , ancho , alto )
+        boton.setBounds( 300 , 131 , 200 , 30 ); // ( x , y , ancho , alto )
         boton.addActionListener( this );
 
-        textoEntrada.setText( "Archivo original:" );
-        textoEntrada.setBounds( 25 , 125 , 200 , 25 );        
-        cajaEntrada.setBounds( 25 , 150, 350 , 400 );
-        
-        if( numeroParametros < 1 ) {
-            seleccionado = fc1.showOpenDialog( this.getContentPane() );
-            if( seleccionado == JFileChooser.APPROVE_OPTION ) {
-                nombreEntrada = fc1.getSelectedFile().getAbsolutePath();
-            }
-        }
-        
-        try {
-            datosEntrada = Ficheros.leer( nombreEntrada );
-            for( String i : datosEntrada ) {
-                cadenaEntrada += i + "\n";
-            }
-        }catch( Exception o ) {
-            cadenaEntrada = o.toString();
-        }
-        cajaEntrada.setText( cadenaEntrada );
+        textoEntrada.setBounds( 25 , 173 , 200 , 25 );        
+        scrollableTextArea1.setBounds( 25 , 210, 350 , 353 );
 
-        textoSalida.setText( "Archivo modificado:" );
-        textoSalida.setBounds( 425 , 125 , 200 , 25 );
-        cajaSalida.setBounds( 425 , 150, 350 , 400 );
+        textoSalida.setBounds( 426 , 173 , 200 , 25 );
+        scrollableTextArea2.setBounds( 425 , 210, 350 , 353 );
         
-        terminar.setText( "Salir" );
         terminar.setBounds( 300 , 575 , 200 , 30 ); // ( x , y , ancho , alto )
         terminar.addActionListener( this );
+
+        txtEntrada = new JTextField();
+        txtEntrada.setBounds(100, 47, 400, 30);
+        txtEntrada.setColumns(10);
+        
+        txtSalida = new JTextField();
+        txtSalida.setBounds(100, 89, 400, 30);
+        txtSalida.setColumns(10);
+        
+        botonEntrada.addActionListener( this );
+        botonEntrada.setBounds(530, 47, 171, 25);
+        
+        botonSalida.addActionListener( this );
+        botonSalida.setBounds(530, 91, 171, 25);
         
         // anyadimos los componentes a la ventana
-        this.add( texto );
-        this.add( textoEntrada );
-        this.add( textoSalida );
-        this.add( boton );
-        this.add( cajaEntrada );
-        this.add( cajaSalida );
-        this.add( terminar );
+        getContentPane().add( texto );
+        getContentPane().add( textoEntrada );
+        getContentPane().add( textoSalida );
+        getContentPane().add( boton );
+        getContentPane().add( scrollableTextArea1 );
+        getContentPane().add( scrollableTextArea2 );
+        getContentPane().add( terminar );
+        getContentPane().add( txtEntrada );
+        getContentPane().add( txtSalida );
+        getContentPane().add( botonEntrada );
+        getContentPane().add( botonSalida );
     }
 
     /**
@@ -129,35 +135,87 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     @Override
     public void actionPerformed( ActionEvent e ){
 
+        fc1 = new JFileChooser();
+        fc2 = new JFileChooser();
+        
     	String resultado = "";
     	ArrayList<String> datos;
+    	ArrayList<String> datosEntrada;
+
     	ArrayList<String> datosSalida;
+    	int seleccionado1;
         int seleccionado2;
         
         if( e.getSource() == terminar ) {
             System.exit(0);
         }
         
-        if( numeroParametros < 2 ) {
-            seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
-            if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
-                nombreSalida = fc2.getSelectedFile().getAbsolutePath();
+        else if( e.getSource() == botonEntrada ) {
+            if( numeroParametros < 1 ) {
+                seleccionado1 = fc1.showOpenDialog( this.getContentPane() );
+                if( seleccionado1 == JFileChooser.APPROVE_OPTION ) {
+                    nombreEntrada = fc1.getSelectedFile().getAbsolutePath();
+                }
             }
-        }
-    	
-    	try {
-            datos = Ficheros.leer( nombreEntrada ) ;
-            Ficheros.escribir( nombreSalida,  Ficheros.eliminarComentarios( datos ) );
-            datosSalida = Ficheros.leer( nombreSalida );
+            txtEntrada.setText( nombreEntrada );
+
+    	    try {
+                datosEntrada = Ficheros.leer( txtEntrada.getText() );
             
-            for( String i : datosSalida ) {
-                resultado += i + "\n";
-            }
-    	}catch( Exception i ) {
-    		resultado = i.toString();
-    	}
+                for( String i : datosEntrada ) {
+                    resultado += i + "\n";
+                }
+                
+        	    cajaEntrada.setText( resultado );
+            }catch( Exception i ) {
+    		    JOptionPane.showMessageDialog(null, "No existe el archivo");
+    	    }
     	
-    	cajaSalida.setText( resultado );
+        }
+        
+        else if( e.getSource() == botonSalida ) {
+            if( numeroParametros < 2 ) {
+                seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
+                if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
+                    nombreSalida = fc2.getSelectedFile().getAbsolutePath();
+                }
+            }
+            
+            txtSalida.setText( nombreSalida );
+
+            File archivo = new File( txtSalida.getText() );
+            if( archivo.exists() ) {
+                try {
+                    datosSalida = Ficheros.leer( txtSalida.getText() );
+            
+                    for( String i : datosSalida ) {
+                        resultado += i + "\n";
+                    }
+                
+        	        cajaSalida.setText( resultado );
+                }catch( Exception i ) {
+    		        JOptionPane.showMessageDialog( null , "No se pudo abrir el archivo" );
+    	        }
+    	    }
+        }
+        
+        else if( e.getSource() == boton ) {
+    	
+    	    try {
+                datos = Ficheros.leer( txtEntrada.getText() );
+                Ficheros.escribir( txtSalida.getText(),  Ficheros.eliminarComentarios( datos ) );
+                datosSalida = Ficheros.leer( txtSalida.getText() );
+            
+                for( String i : datosSalida ) {
+                    resultado += i + "\n";
+                }
+                
+        	    cajaSalida.setText( resultado );
+            }catch( Exception i ) {
+    		    JOptionPane.showMessageDialog( null , "Seleccione los archivos primero" );
+    	    }
+    	}
+        
     }
 
     public static void main( String[] args ) {
@@ -182,5 +240,4 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         FicherosInterfaz miVentana = new FicherosInterfaz( autor );
         miVentana.setVisible( true );
     }
-
 } // fin de la clase Interfaz
