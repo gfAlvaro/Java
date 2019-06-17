@@ -104,9 +104,47 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         txtEntrada.setBounds(100, 47, 400, 30);
         txtEntrada.setColumns(10);
         
+        if(numeroParametros >= 1 ) {
+        	txtEntrada.setText( nombreEntrada );
+            
+            try {
+                ArrayList<String> array = Ficheros.leer( txtEntrada.getText() );
+                String resultado = "";
+                
+                for(String i : array ) {
+                	resultado = i + "\n";
+                }
+
+                cajaEntrada.setText( resultado );
+            }
+            catch( Exception k ) {
+            	JOptionPane.showMessageDialog(null, "El archivo de entrada no existe");
+            }
+        }
+        
         txtSalida = new JTextField();
         txtSalida.setBounds(100, 89, 400, 30);
         txtSalida.setColumns(10);
+ 
+        if(numeroParametros >= 2 ) {
+        	txtSalida.setText( nombreSalida );
+        	
+            try {
+                ArrayList<String> array2 = Ficheros.leer( txtSalida.getText() );
+                String resultado2 = "";
+                
+                for(String i : array2 ) {
+                	resultado2 = i + "\n";
+                }
+
+                cajaSalida.setText( resultado2 );
+            }
+            catch( Exception k ) {
+            	new File( txtSalida.getText() );
+            }
+        }
+        
+        numeroParametros = 0;
         
         botonEntrada.addActionListener( this );
         botonEntrada.setBounds(530, 47, 171, 25);
@@ -151,17 +189,13 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         }
         
         else if( e.getSource() == botonEntrada ) {
-            if( numeroParametros < 1 ) {
-                seleccionado1 = fc1.showOpenDialog( this.getContentPane() );
-                if( seleccionado1 == JFileChooser.APPROVE_OPTION ) {
-                    nombreEntrada = fc1.getSelectedFile().getAbsolutePath();
-                }
-            }
-            else {
-                numeroParametros = 0;
+        	
+            seleccionado1 = fc1.showOpenDialog( this.getContentPane() );
+            if( seleccionado1 == JFileChooser.APPROVE_OPTION ) {
+                nombreEntrada = fc1.getSelectedFile().getAbsolutePath();
+                txtEntrada.setText( nombreEntrada );
             }
             	
-            txtEntrada.setText( nombreEntrada );
 
     	    try {
                 datosEntrada = Ficheros.leer( txtEntrada.getText() );
@@ -178,16 +212,12 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         }
         
         else if( e.getSource() == botonSalida ) {
-            if( numeroParametros < 2 ) {
-                seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
-                if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
-                    nombreSalida = fc2.getSelectedFile().getAbsolutePath();
-                }
+        	
+            seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
+            if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
+                nombreSalida = fc2.getSelectedFile().getAbsolutePath();
+                txtSalida.setText( nombreSalida );
             }
-            else {
-                numeroParametros = 1;
-            }
-            txtSalida.setText( nombreSalida );
 
             File archivo = new File( txtSalida.getText() );
             if( archivo.exists() ) {
