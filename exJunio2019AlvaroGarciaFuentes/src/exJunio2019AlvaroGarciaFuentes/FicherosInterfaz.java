@@ -130,7 +130,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
     /**
      * establece la acción que se lleva a cabo
-     * al pulsar el botón
+     * al pulsar cada botón
      */
     @Override
     public void actionPerformed( ActionEvent e ){
@@ -157,6 +157,10 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
                     nombreEntrada = fc1.getSelectedFile().getAbsolutePath();
                 }
             }
+            else {
+                numeroParametros = 0;
+            }
+            	
             txtEntrada.setText( nombreEntrada );
 
     	    try {
@@ -180,7 +184,9 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
                     nombreSalida = fc2.getSelectedFile().getAbsolutePath();
                 }
             }
-            
+            else {
+                numeroParametros = 1;
+            }
             txtSalida.setText( nombreSalida );
 
             File archivo = new File( txtSalida.getText() );
