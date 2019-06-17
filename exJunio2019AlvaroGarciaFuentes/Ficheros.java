@@ -1,3 +1,8 @@
+/**
+ * Ficheros.java
+ * Clase con los métodos para trabajar con ficheros
+ * @author Alvaro Garcia Fuentes
+ */
 package exJunio2019AlvaroGarciaFuentes;
 
 import java.io.File;
