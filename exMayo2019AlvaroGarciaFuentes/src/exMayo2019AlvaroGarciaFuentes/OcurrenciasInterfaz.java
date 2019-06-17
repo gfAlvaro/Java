@@ -7,13 +7,16 @@ package exMayo2019AlvaroGarciaFuentes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class OcurrenciasInterfaz extends JFrame implements ActionListener {
 
@@ -31,6 +34,12 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     private JButton boton;
     private JFileChooser fc1;
     private JFileChooser fc2;
+    private JTextField txtTextoentrada;
+    private JTextField txtTextosalida;
+    private JButton botonEntrada;
+    private JButton botonSalida;
+    private JScrollPane scrollableTextArea1;
+    private JScrollPane scrollableTextArea2;  
 
     /**
      * Constructor
@@ -47,7 +56,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     private void configurarVentana(){
         this.setSize( 800 , 600 );
         this.setLocationRelativeTo( null );
-        this.setLayout( null );
+        getContentPane().setLayout( null );
         this.setResizable( false );
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
@@ -58,58 +67,56 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     private void inicializarComponentes() {
 
         // creamos los componentes
-        texto = new JLabel();
+        texto = new JLabel( "Sustitucion de caracteres de un archivo."  );
         caja = new JTextField();
-        boton = new JButton();
-        textoEntrada = new JLabel();
-        textoSalida = new JLabel();
+        boton = new JButton("Ok");
+        textoEntrada = new JLabel( "Archivo original:" );
+        textoSalida = new JLabel( "Archivo modificado:" );
         cajaEntrada = new JTextArea();
         cajaSalida = new JTextArea();
-        fc1 = new JFileChooser();
-        int seleccionado;
-        String cadenaEntrada = "";
-        ArrayList<String> datosEntrada;
+        botonEntrada = new JButton( "Fichero Entrada" );
+        botonSalida = new JButton( "Fichero de salida" );
+        txtTextoentrada = new JTextField();
+        txtTextosalida = new JTextField();
+        scrollableTextArea1 = new JScrollPane(cajaEntrada);
+        scrollableTextArea2 = new JScrollPane(cajaSalida);  
         
         // configuramos los componentes
-        texto.setText( "Sustitucion de caracteres de un archivo." );
-        texto.setBounds( 260 , 25 , 400 , 25 );
+        texto.setBounds( 244 , 12 , 400 , 25 );
 
-        boton.setText( "Sustituir" );
-        boton.setBounds( 325 , 100 , 150 , 30 );
+        boton.setBounds( 332 , 144 , 150 , 30 );
         boton.addActionListener( this );
 
-        textoEntrada.setText( "Archivo original: " );
-        textoEntrada.setBounds( 25 , 150 , 150 , 25 );
-        cajaEntrada.setBounds( 25 , 175 , 350 , 350 );
-
-        seleccionado = fc1.showOpenDialog( this.getContentPane() );
-        if( seleccionado == JFileChooser.APPROVE_OPTION ) {
-            archivoEntrada = fc1.getSelectedFile().getAbsolutePath();
-        }
+        textoEntrada.setBounds( 35 , 186 , 150 , 25 );
+        scrollableTextArea1.setBounds( 35 , 223 , 350 , 302 );
         
-        try {
-            datosEntrada = Ocurrencias.leerArchivo( archivoEntrada );
-
-            for( String i : datosEntrada ){
-                cadenaEntrada += i + "\n";
-            }
-        }catch( Exception e ) {
-            cadenaEntrada = e.toString();
-        }
-        cajaEntrada.setText( cadenaEntrada );
+        textoSalida.setBounds( 424 , 186 , 150 , 25 );
+        scrollableTextArea2.setBounds( 414 , 223 , 350 , 302 );
         
-        textoSalida.setText( "Archivo modificado: " );
-        textoSalida.setBounds( 425 , 150 , 150 , 25 );
-        cajaSalida.setBounds( 425 , 175 , 350 , 350 );
-
+        botonEntrada.setBounds(587, 49, 150, 30);
+        botonEntrada.addActionListener( this );
+        
+        botonSalida.setBounds(587, 94, 150, 30);
+        botonSalida.addActionListener( this );   
+        
+        txtTextoentrada.setBounds(113, 52, 446, 25);
+        txtTextoentrada.setColumns(10);
+        
+        txtTextosalida.setBounds(113, 100, 446, 25);
+        txtTextosalida.setColumns(10);
+        
         // añadimos componentes a la ventana
-        this.add( texto );
-        this.add( caja );
-        this.add( boton );
-        this.add( textoEntrada );
-        this.add( cajaEntrada );
-        this.add( textoSalida );
-        this.add( cajaSalida );
+        getContentPane().add( texto );
+        getContentPane().add( caja );
+        getContentPane().add( boton );
+        getContentPane().add( textoEntrada );
+        getContentPane().add( scrollableTextArea1 );
+        getContentPane().add( textoSalida );
+        getContentPane().add( scrollableTextArea2 );
+        getContentPane().add( botonEntrada );    
+        getContentPane().add( botonSalida );        
+        getContentPane().add( txtTextoentrada );
+        getContentPane().add( txtTextosalida );
     }
 
     /**
@@ -119,41 +126,84 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     @Override
     public void actionPerformed( ActionEvent e ){
 
+    	fc1 = new JFileChooser();
     	fc2 = new JFileChooser();
         String resultado = "";
         ArrayList<String> datos;
-        ArrayList<String> datosSalida;
+        ArrayList<String> datosEntrada;
+        ArrayList<String> datosSalida = new ArrayList<String>();
         int seleccionado;
-        
-        // ventana para elegir archivo de salida
-        seleccionado = fc2.showOpenDialog( this.getContentPane() );
-        if( seleccionado == JFileChooser.APPROVE_OPTION ) {
-            archivoSalida = fc2.getSelectedFile().getAbsolutePath();
-        }
-        
-        // leer archivo de entrada, sustituir caracteres y escribir en archivo de salida
-        try {
-            datos = Ocurrencias.leerArchivo( archivoEntrada );
-            datos = Ocurrencias.sustituir( datos );
-            Ocurrencias.escribirArchivo( archivoSalida , datos );
-            
-            datosSalida = Ocurrencias.leerArchivo( archivoSalida );
-            
-            for( String i : datosSalida ) {
-                resultado += i + "\n";
+        int seleccionado2;
+
+        if( e.getSource() == botonEntrada ) {
+            seleccionado = fc1.showOpenDialog( this.getContentPane() );
+            if( seleccionado == JFileChooser.APPROVE_OPTION ) {
+                archivoEntrada = fc1.getSelectedFile().getAbsolutePath();
+                txtTextoentrada.setText(archivoEntrada);
+                
+                try {
+                datosEntrada = Ocurrencias.leerArchivo( archivoEntrada );
+                
+                for( String i : datosEntrada ) {
+                    resultado += i + "\n";
+                }
+                
+                cajaEntrada.setText( resultado );
+                }catch(Exception i ){
+                    JOptionPane.showMessageDialog(null, "El archivo no existe.");
+                }
             }
             
-        }catch( Exception g ){
-            resultado = g.toString();
         }
+        
+        else if( e.getSource() == botonSalida ) {
+            seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
+            if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
+                archivoSalida = fc2.getSelectedFile().getAbsolutePath();
+                txtTextosalida.setText( archivoSalida );
+                
+                File archivo = new File( txtTextosalida.getText() );
+                if( archivo.exists() ) {
+                    try {
+                        datosSalida = Ocurrencias.leerArchivo( txtTextosalida.getText() );
+                
+                        for( String i : datosSalida ) {
+                            resultado += i + "\n";
+                        }
+                
+                        cajaSalida.setText( resultado );
+                    }catch(Exception i ){
+                        JOptionPane.showMessageDialog( null, "No se pudo leer el archivo." );
+                    }
+                }
+            }
+        }
+        
+        else if( e.getSource() == boton ) {
+        
+            // leer archivo de entrada, sustituir caracteres y escribir en archivo de salida
+            try {
+                datos = Ocurrencias.leerArchivo( txtTextoentrada.getText() );
+                datos = Ocurrencias.sustituir( datos );
+                Ocurrencias.escribirArchivo( txtTextosalida.getText() , datos );
+            
+                datosSalida = Ocurrencias.leerArchivo( txtTextosalida.getText() );
+            
+                for( String i : datosSalida ) {
+                    resultado += i + "\n";
+                }
+                    
+                // mostrar achivo de salida
+                cajaSalida.setText( resultado );	
+            }catch( Exception g ){
+                JOptionPane.showMessageDialog(null, "Seleccione primero los archivos");
+            }
+        }
+        
+    }
 
-        // mostrar achivo de salida
-        cajaSalida.setText( resultado );
-        }
-	
     public static void main( String[] args ) {
         OcurrenciasInterfaz miVentana = new OcurrenciasInterfaz();
         miVentana.setVisible( true );
     }
-
 } // Fin del programa
