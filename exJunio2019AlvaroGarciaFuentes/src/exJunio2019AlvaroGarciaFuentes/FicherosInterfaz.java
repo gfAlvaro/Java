@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 public class FicherosInterfaz extends JFrame implements ActionListener {
 
-    private static final long serialVersionUID = 1L;
+    private static final long  serialVersionUID = 1L;
 
     private static boolean  leerEntrada = true;
     private static boolean  leerSalida = true;
