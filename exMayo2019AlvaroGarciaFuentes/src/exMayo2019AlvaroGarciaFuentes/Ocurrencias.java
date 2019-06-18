@@ -14,12 +14,12 @@ import java.io.PrintWriter;
 
 public class Ocurrencias{
 
-    private static final char[][] CADENAS = {{'A','B','E','I','O','S','T'},{'4','8','3','1','0','5','7'}};
+    private static final char[][]  CADENAS = {{'A','B','E','I','O','S','T'},{'4','8','3','1','0','5','7'}};
 
     /**
      * convierte un caracter en otro según el array de caracteres de la clase
      * @param c
-     * @return
+     * @return char
      */
     private static char convertir( char c ) {
 
@@ -34,44 +34,43 @@ public class Ocurrencias{
 
         return salida;
     }
-	
+
     /**
-     * funcion auxiliar para sustituir caracteres de una cadena
+     * metodo auxiliar para sustituir caracteres de una cadena
      * @param cadena
-     * @return
+     * @return String
      */
     private static String cambio( String cadena ) {
-		
+
         String salida = "";
-    	
+
         for( char i : cadena.toCharArray() ){
             salida += convertir(i);
         }
-    		
+
         return salida;
     }
-    
+
     /**
-     * función para sustituir caracteres de un ArrayList de cadenas pasado como parámetro
+     * metodo para sustituir caracteres de un ArrayList de cadenas pasado como parámetro
      * @param entrada
-     * @return
      * @throws Exception
      */
     public static void sustituir( String entrada , String salida ) throws Exception {
 
-    	File archivo = new File(entrada);
-    	FileReader fr = new FileReader(archivo);
-    	BufferedReader br = new BufferedReader(fr);
-    	
-    	FileWriter archivoSalida = new FileWriter(salida);
-    	PrintWriter pw = new PrintWriter(archivoSalida);
-    	
-    	String cadena = "";
-    	
-    	while(  ( cadena = br.readLine() ) != null  ) {
+        File archivo = new File( entrada );
+        FileReader fr = new FileReader( archivo );
+        BufferedReader br = new BufferedReader( fr );
+
+        FileWriter archivoSalida = new FileWriter( salida );
+        PrintWriter pw = new PrintWriter( archivoSalida );
+
+        String cadena = "";
+
+        while(  ( cadena = br.readLine() ) != null  ) {
             pw.println(  cambio( cadena )  );
-    	}
-    	
+        }
+
         fr.close();
         archivoSalida.close();
     }
