@@ -7,13 +7,10 @@
 package exMayo2019AlvaroGarciaFuentes;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class Ocurrencias{
 
@@ -60,58 +57,23 @@ public class Ocurrencias{
      * @return
      * @throws Exception
      */
-    public static ArrayList<String> sustituir( ArrayList<String> entrada ) throws Exception {
+    public static void sustituir( String entrada , String salida ) throws Exception {
 
-        ArrayList<String> salida = new ArrayList<String>();
-
-        for( String i : entrada  ) {
-            salida.add( cambio(i) );
-        }
-
-        return salida;
-    }
-
-    /**
-     * escribe datos en un archivo
-     * @param ficheroSalida
-     * @param lineas
-     * @throws IOException
-     */
-	public static void escribirArchivo( String ficheroSalida , ArrayList<String> lineas ) throws IOException {
-
-		FileWriter fichero = new FileWriter( ficheroSalida );
-        PrintWriter pw = new PrintWriter( fichero );
-
-        while( ! lineas.isEmpty() ) {
-            pw.println( lineas.get(0) );
-            lineas.remove(0);
-        }
-
-        fichero.close();
-    }
-
-	/**
-	 * lee los datos de un archivo
-	 * @param entrada
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-    public static ArrayList<String> leerArchivo( String entrada ) throws FileNotFoundException, IOException {
-
-        ArrayList<String> resultado = new ArrayList<String>();
-        String linea;
-        File f = new File( entrada );
-        FileReader fr = new FileReader( f );
-        BufferedReader br = new BufferedReader( fr );
-
-        while(  ( linea = br.readLine() ) != null  ) {
-            resultado.add( linea );
-        }
-
+    	File archivo = new File(entrada);
+    	FileReader fr = new FileReader(archivo);
+    	BufferedReader br = new BufferedReader(fr);
+    	
+    	FileWriter archivoSalida = new FileWriter(salida);
+    	PrintWriter pw = new PrintWriter(archivoSalida);
+    	
+    	String cadena = "";
+    	
+    	while(  ( cadena = br.readLine() ) != null  ) {
+            pw.println(  cambio( cadena )  );
+    	}
+    	
         fr.close();
-
-        return resultado;
-	}
+        archivoSalida.close();
+    }
 
 } // Fin del programa

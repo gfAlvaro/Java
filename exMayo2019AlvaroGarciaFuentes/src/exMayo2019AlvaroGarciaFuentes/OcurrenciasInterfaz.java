@@ -7,8 +7,11 @@ package exMayo2019AlvaroGarciaFuentes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.util.ArrayList;
+import java.io.FileReader;
+import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -129,12 +132,11 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     	fc1 = new JFileChooser();
     	fc2 = new JFileChooser();
         String resultado = "";
-        ArrayList<String> datos;
-        ArrayList<String> datosEntrada;
-        ArrayList<String> datosSalida = new ArrayList<String>();
         int seleccionado;
         int seleccionado2;
-
+        //boolean leerEntrada = true;
+        //boolean leerSalida = false;
+        
         if( e.getSource() == botonEntrada ) {
             seleccionado = fc1.showOpenDialog( this.getContentPane() );
             if( seleccionado == JFileChooser.APPROVE_OPTION ) {
@@ -142,13 +144,19 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                 txtTextoentrada.setText(archivoEntrada);
                 
                 try {
-                datosEntrada = Ocurrencias.leerArchivo( archivoEntrada );
                 
-                for( String i : datosEntrada ) {
-                    resultado += i + "\n";
-                }
+                    File archivoEntrada = new File( txtTextoentrada.getText() );
+                    FileReader fr = new FileReader( archivoEntrada );
+                    BufferedReader br = new BufferedReader(fr);
+                    String i="";
                 
-                cajaEntrada.setText( resultado );
+                    while( ( i = br.readLine() ) != null ) {
+                        resultado = i + "\n";
+                        cajaEntrada.append( resultado );
+                    }
+                
+                
+                    br.close();
                 }catch(Exception i ){
                     JOptionPane.showMessageDialog(null, "El archivo no existe.");
                 }
@@ -157,24 +165,21 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
         }
         
         else if( e.getSource() == botonSalida ) {
+        	
             seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
             if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
                 archivoSalida = fc2.getSelectedFile().getAbsolutePath();
                 txtTextosalida.setText( archivoSalida );
-                
+                                
+                try {
                 File archivo = new File( txtTextosalida.getText() );
-                if( archivo.exists() ) {
-                    try {
-                        datosSalida = Ocurrencias.leerArchivo( txtTextosalida.getText() );
-                
-                        for( String i : datosSalida ) {
-                            resultado += i + "\n";
-                        }
-                
-                        cajaSalida.setText( resultado );
-                    }catch(Exception i ){
-                        JOptionPane.showMessageDialog( null, "No se pudo leer el archivo." );
-                    }
+                if(!archivo.isFile() ) {
+                	FileWriter ficheroSalida = new FileWriter(txtTextosalida.getText() );
+                	BufferedWriter bw = new BufferedWriter(ficheroSalida);
+                	bw.close();
+                }
+                }catch( Exception q ){
+                    JOptionPane.showMessageDialog( null , "No se pudo crear el archivo de salida" );	
                 }
             }
         }
@@ -183,20 +188,24 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
         
             // leer archivo de entrada, sustituir caracteres y escribir en archivo de salida
             try {
-                datos = Ocurrencias.leerArchivo( txtTextoentrada.getText() );
-                datos = Ocurrencias.sustituir( datos );
-                Ocurrencias.escribirArchivo( txtTextosalida.getText() , datos );
+            	File archivo = new File( txtTextosalida.getText() );
+            	FileReader fr = new FileReader( archivo );
+            	BufferedReader br = new BufferedReader( fr );
+            	String salida = "";
+            	String i;
+            	
+                Ocurrencias.sustituir( txtTextoentrada.getText() , txtTextosalida.getText() );
             
-                datosSalida = Ocurrencias.leerArchivo( txtTextosalida.getText() );
             
-                for( String i : datosSalida ) {
-                    resultado += i + "\n";
+                while( ( i = br.readLine() ) != null ) {
+                    salida = i + "\n";
+                    cajaSalida.append( salida );
                 }
-                    
-                // mostrar achivo de salida
-                cajaSalida.setText( resultado );	
+                
+                br.close();
+                
             }catch( Exception g ){
-                JOptionPane.showMessageDialog(null, "Seleccione primero los archivos");
+                JOptionPane.showMessageDialog( null, "Seleccione primero los archivos" );
             }
         }
         
