@@ -43,7 +43,8 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
     private JButton botonSalida;
     private JScrollPane scrollableTextArea1;
     private JScrollPane scrollableTextArea2;  
-
+    private boolean leerEntrada = true;
+    private boolean leerSalida = true;
     /**
      * Constructor
      */
@@ -134,10 +135,9 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
         String resultado = "";
         int seleccionado;
         int seleccionado2;
-        //boolean leerEntrada = true;
-        //boolean leerSalida = false;
+
         
-        if( e.getSource() == botonEntrada ) {
+        if(  ( e.getSource() == botonEntrada ) && leerEntrada  ) {
             seleccionado = fc1.showOpenDialog( this.getContentPane() );
             if( seleccionado == JFileChooser.APPROVE_OPTION ) {
                 archivoEntrada = fc1.getSelectedFile().getAbsolutePath();
@@ -161,10 +161,10 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "El archivo no existe.");
                 }
             }
-            
+           leerEntrada = false; 
         }
         
-        else if( e.getSource() == botonSalida ) {
+        else if(  ( e.getSource() == botonSalida ) && leerSalida ){
         	
             seleccionado2 = fc2.showOpenDialog( this.getContentPane() );
             if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
@@ -182,6 +182,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog( null , "No se pudo crear el archivo de salida" );	
                 }
             }
+            leerSalida = false;
         }
         
         else if( e.getSource() == boton ) {
