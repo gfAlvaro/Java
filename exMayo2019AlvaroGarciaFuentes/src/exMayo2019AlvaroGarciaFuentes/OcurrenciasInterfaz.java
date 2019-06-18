@@ -147,11 +147,12 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     }
 
                     br.close();
+                    leerEntrada = false; 
+
                 }catch(Exception i ){
                     JOptionPane.showMessageDialog(null, "El archivo no existe.");
                 }
             }
-            leerEntrada = false; 
         }
 
         else if(  ( e.getSource() == botonSalida ) && leerSalida ){
@@ -169,12 +170,12 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     FileWriter ficheroSalida = new FileWriter(campoSalida.getText() );
                     BufferedWriter bw = new BufferedWriter(ficheroSalida);
                     bw.close();
+                    leerSalida = false;
                 }
                 }catch( Exception q ){
                     JOptionPane.showMessageDialog( null , "No se pudo crear el archivo de salida" );	
                 }
             }
-            leerSalida = false;
         }
 
         else if(  sustituir && ( e.getSource() == botonSustituir )  ) {
@@ -196,7 +197,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                 }
 
                 br.close();
-
+                sustituir = false;
             }catch( Exception g ){
                 JOptionPane.showMessageDialog( null , "Seleccione primero los archivos" );
             }
