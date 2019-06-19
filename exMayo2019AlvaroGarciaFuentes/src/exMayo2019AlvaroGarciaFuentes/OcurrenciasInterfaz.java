@@ -27,9 +27,6 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
 
     private String  archivoEntrada;    
     private String  archivoSalida;
-    private boolean  leerEntrada = true;
-    private boolean  leerSalida = true;
-    private boolean sustituir = true;
 
     private JLabel  textoEncabezado;
     private JLabel  textoEntrada;
@@ -129,7 +126,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
         int seleccionado;
         int seleccionado2;
 
-        if(  ( e.getSource() == botonEntrada ) && leerEntrada  ) {
+        if(  ( e.getSource() == botonEntrada )   ) {
             seleccionado = elegirArchivoEntrada.showOpenDialog( this.getContentPane() );
             if( seleccionado == JFileChooser.APPROVE_OPTION ) {
                 archivoEntrada = elegirArchivoEntrada.getSelectedFile().getAbsolutePath();
@@ -147,7 +144,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     }
 
                     br.close();
-                    leerEntrada = false; 
+                    botonEntrada.setEnabled(false);
 
                 }catch(Exception i ){
                     JOptionPane.showMessageDialog(null, "El archivo no existe.");
@@ -155,7 +152,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
             }
         }
 
-        else if(  ( e.getSource() == botonSalida ) && leerSalida ){
+        else if(  ( e.getSource() == botonSalida )  ){
 
             seleccionado2 = elegirArchivoSalida.showOpenDialog( this.getContentPane() );
             if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
@@ -170,15 +167,15 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                     FileWriter ficheroSalida = new FileWriter(campoSalida.getText() );
                     BufferedWriter bw = new BufferedWriter(ficheroSalida);
                     bw.close();
-                    leerSalida = false;
                 }
+                botonSalida.setEnabled(false);
                 }catch( Exception q ){
                     JOptionPane.showMessageDialog( null , "No se pudo crear el archivo de salida" );	
                 }
             }
         }
 
-        else if(  sustituir && ( e.getSource() == botonSustituir )  ) {
+        else if(   ( e.getSource() == botonSustituir )  ) {
 
             // leer archivo de entrada, sustituir caracteres y escribir en archivo de salida
             try {
@@ -197,7 +194,7 @@ public class OcurrenciasInterfaz extends JFrame implements ActionListener {
                 }
 
                 br.close();
-                sustituir = false;
+                botonSustituir.setEnabled(false);
             }catch( Exception g ){
                 JOptionPane.showMessageDialog( null , "Seleccione primero los archivos" );
             }
