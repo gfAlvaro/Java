@@ -23,12 +23,10 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
     private static final long  serialVersionUID = 1L;
 
-    private static boolean  leerEntrada = true;
-    private static boolean  leerSalida = true;
-    private boolean  eliminarComentarios = true;
     private static String  nombreArchivoEntrada;
     private static String  nombreArchivoSalida;
-
+    private static int  numeroParametros;
+    
     private JLabel  textoEncabezado;
     private JLabel  textoEntrada;
     private JLabel  textoSalida;
@@ -38,9 +36,9 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private JTextArea  cajaSalida;
     private JScrollPane  scrollEntrada;
     private JScrollPane  scrollSalida;
-    private JButton  botonEntrada;
-    private JButton  botonSalida;
-    private JButton  botonLimpiar;
+    private static JButton  botonEntrada;
+    private static JButton  botonSalida;
+    private static JButton  botonLimpiar;
     private JButton  terminar;
     private JFileChooser  elegirArchivoEntrada;
     private JFileChooser  elegirArchivoSalida;
@@ -103,7 +101,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         txtEntrada.setBounds( 100 , 47 , 400 , 30 );
         txtEntrada.setColumns(10);
         
-        if( !leerEntrada ) {
+        if( numeroParametros >= 1 ) {
         	txtEntrada.setText( nombreArchivoEntrada );
             
             try {
@@ -131,7 +129,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         txtSalida.setBounds( 100 , 89 , 400 , 30 );
         txtSalida.setColumns(10);
  
-        if( !leerSalida ) {
+        if( numeroParametros == 2 ) {
         	txtSalida.setText( nombreArchivoSalida );
         }
                 
@@ -173,7 +171,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
             System.exit(0);
         }
         
-        else if(  leerEntrada && ( e.getSource() == botonEntrada )  ){
+        else if( e.getSource() == botonEntrada ){
         	
             seleccionado1 = elegirArchivoEntrada.showOpenDialog( this.getContentPane() );
             if( seleccionado1 == JFileChooser.APPROVE_OPTION ) {
@@ -193,14 +191,14 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
                 }
                 
                 br.close();
-        	    leerEntrada = false;
+                botonEntrada.setEnabled(false);
             }catch( Exception i ) {
     		    JOptionPane.showMessageDialog( null , "No existe el archivo" );
     	    }
 
         }
         
-        else if(  leerSalida && ( e.getSource() == botonSalida )  ) {
+        else if( e.getSource() == botonSalida ) {
 
             seleccionado2 = elegirArchivoSalida.showOpenDialog( this.getContentPane() );
             if( seleccionado2 == JFileChooser.APPROVE_OPTION ) {
@@ -216,7 +214,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
                     BufferedReader br = new BufferedReader( fr );
                 
                     br.close();
-                    leerSalida = false;
+                    botonSalida.setEnabled(false);
                 }catch( Exception i ) {
     		        JOptionPane.showMessageDialog( null , "No se pudo abrir el archivo" );
     	        }
@@ -224,7 +222,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
             
         }
         
-        else if( eliminarComentarios && ( e.getSource() == botonLimpiar )  ) {
+        else if( e.getSource() == botonLimpiar ) {
     	
     	    try {
                 Ficheros.eliminarComentarios( txtEntrada.getText(), txtSalida.getText() );
@@ -240,7 +238,7 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
                 }
                 
                 br.close();
-                eliminarComentarios = false;
+                botonLimpiar.setEnabled(false);
             }catch( Exception i ) {
     		    JOptionPane.showMessageDialog( null , "Seleccione primero los archivos" );
             }
@@ -252,16 +250,22 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
         String autor = "";
         
-        if(  args.length == 2  ) {
+        numeroParametros = args.length;
+        
+        if(  numeroParametros == 2  ) {
             nombreArchivoEntrada = args[0];
             nombreArchivoSalida = args[1];
-            leerEntrada = false;
-            leerSalida = false;
+            botonEntrada.setEnabled(false);
+            botonSalida.setEnabled(false);
         }
     
-        else if( args.length == 1 ) {
+        else if( numeroParametros == 1 ) {
             nombreArchivoEntrada = args[0];
-            leerEntrada = false;
+            botonSalida.setEnabled(false);
+        }
+        else if( numeroParametros != 0 ){
+        	JOptionPane.showMessageDialog(null, "Numero de parametros incorrecto");
+        	System.exit(0);
         }
     
         try {
