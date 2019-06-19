@@ -26,6 +26,8 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
     private static String  nombreArchivoEntrada;
     private static String  nombreArchivoSalida;
     private static int  numeroParametros;
+    private static boolean  leerEntrada = true;
+    private static boolean  leerSalida = true;
     
     private JLabel  textoEncabezado;
     private JLabel  textoEntrada;
@@ -100,7 +102,10 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
 
         txtEntrada.setBounds( 100 , 47 , 400 , 30 );
         txtEntrada.setColumns(10);
-        
+
+        botonEntrada.setEnabled(leerEntrada);
+    	botonSalida.setEnabled(leerSalida);
+
         if( numeroParametros >= 1 ) {
         	txtEntrada.setText( nombreArchivoEntrada );
             
@@ -255,13 +260,13 @@ public class FicherosInterfaz extends JFrame implements ActionListener {
         if(  numeroParametros == 2  ) {
             nombreArchivoEntrada = args[0];
             nombreArchivoSalida = args[1];
-            botonEntrada.setEnabled(false);
-            botonSalida.setEnabled(false);
+            leerEntrada = false;
+            leerSalida = false;
         }
     
         else if( numeroParametros == 1 ) {
             nombreArchivoEntrada = args[0];
-            botonSalida.setEnabled(false);
+            leerEntrada = false;
         }
         else if( numeroParametros != 0 ){
         	JOptionPane.showMessageDialog(null, "Numero de parametros incorrecto");
